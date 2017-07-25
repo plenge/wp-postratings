@@ -1,9 +1,9 @@
 <?php
 /**
- * WP-PostRatings Admin.
+ * wp-postratings-pretty Admin.
  *
  * @package WordPress
- * @subpackage WP-PostRatings Plugin
+ * @subpackage wp-postratings-pretty Plugin
  */
 
 
@@ -52,39 +52,39 @@ class WPPostRatingsAdmin {
 
 		// Main Ratings Menu
 		add_menu_page(
-			__( 'Ratings', 'wp-postratings' ),
-			__( 'Ratings', 'wp-postratings' ),
+			__( 'Ratings', 'wp-postratings-pretty' ),
+			__( 'Ratings', 'wp-postratings-pretty' ),
 			'manage_ratings',
-			'wp-postratings/postratings-manager.php',
+			'wp-postratings-pretty/postratings-manager.php',
 			'',
 			'dashicons-star-filled'
 		);
 
 		// Manage Ratings
 		add_submenu_page(
-			'wp-postratings/postratings-manager.php',
-			__( 'Manage Ratings', 'wp-postratings' ),
-			__( 'Manage Ratings', 'wp-postratings' ),
+			'wp-postratings-pretty/postratings-manager.php',
+			__( 'Manage Ratings', 'wp-postratings-pretty' ),
+			__( 'Manage Ratings', 'wp-postratings-pretty' ),
 			'manage_ratings',
-			'wp-postratings/postratings-manager.php'
+			'wp-postratings-pretty/postratings-manager.php'
 		);
 
 		// Ratings Options
 		add_submenu_page(
-			'wp-postratings/postratings-manager.php',
-			__( 'Ratings Options', 'wp-postratings' ),
-			__( 'Ratings Options', 'wp-postratings' ),
+			'wp-postratings-pretty/postratings-manager.php',
+			__( 'Ratings Options', 'wp-postratings-pretty' ),
+			__( 'Ratings Options', 'wp-postratings-pretty' ),
 			'manage_ratings',
-			'wp-postratings/postratings-options.php'
+			'wp-postratings-pretty/postratings-options.php'
 		);
 
 		// Manage Templates
 		add_submenu_page(
-			'wp-postratings/postratings-manager.php',
-			__( 'Ratings Templates', 'wp-postratings' ),
-			__( 'Ratings Templates', 'wp-postratings' ),
+			'wp-postratings-pretty/postratings-manager.php',
+			__( 'Ratings Templates', 'wp-postratings-pretty' ),
+			__( 'Ratings Templates', 'wp-postratings-pretty' ),
 			'manage_ratings',
-			'wp-postratings/postratings-templates.php'
+			'wp-postratings-pretty/postratings-templates.php'
 		);
 
 	}
@@ -94,7 +94,7 @@ class WPPostRatingsAdmin {
 	 */
 	function postrating_admin_column_title( $defaults ) {
 
-		$defaults['ratings'] = esc_html__( 'Ratings', 'wp-postratings' );
+		$defaults['ratings'] = esc_html__( 'Ratings', 'wp-postratings-pretty' );
 		return $defaults;
 
 	}

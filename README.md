@@ -1,4 +1,4 @@
-# WP-PostRatings
+# wp-postratings-pretty
 Contributors: GamerZ  
 Donate link: https://lesterchan.net/site/donation/  
 Tags: ratings, rating, postratings, postrating, vote, digg, ajax, post  
@@ -21,13 +21,13 @@ Adds an AJAX rating system for your WordPress site's content.
 * If you want to embed other post ratings results, use `[ratings id="1" results="true"]`, where 1 is the ID of the post/page ratings results that you want to display.
 
 ### Build Status
-[![Build Status](https://travis-ci.org/lesterchan/wp-postratings.svg?branch=master)](https://travis-ci.org/lesterchan/wp-postratings)
+[![Build Status](https://travis-ci.org/lesterchan/wp-postratings-pretty.svg?branch=master)](https://travis-ci.org/lesterchan/wp-postratings-pretty)
 
 ### Development
-[https://github.com/lesterchan/wp-postratings](https://github.com/lesterchan/wp-postratings "https://github.com/lesterchan/wp-postratings")
+[https://github.com/lesterchan/wp-postratings-pretty](https://github.com/lesterchan/wp-postratings-pretty "https://github.com/lesterchan/wp-postratings-pretty")
 
 ### Translations
-[http://dev.wp-plugins.org/browser/wp-postratings/i18n/](http://dev.wp-plugins.org/browser/wp-postratings/i18n/ "http://dev.wp-plugins.org/browser/wp-postratings/i18n/")
+[http://dev.wp-plugins.org/browser/wp-postratings-pretty/i18n/](http://dev.wp-plugins.org/browser/wp-postratings-pretty/i18n/ "http://dev.wp-plugins.org/browser/wp-postratings-pretty/i18n/")
 
 ### Credits
 * Plugin icon by [Freepik](http://www.freepik.com) from [Flaticon](http://www.flaticon.com)
@@ -218,10 +218,10 @@ add_filter( 'wp_postratings_cookie_expiration', 'custom_rating_cookie_expiration
 
 The default cookie expiration if 'time() + 30000000', if you want to change the lenght of the experation, you need to make use of the `wp_postratings_cookie_expiration` filter as shown in the sample code above.
 
-### How Does WP-PostRatings Load CSS?
-* WP-PostRatings will load `postratings-css.css` from your theme's CSS directory if it exists.
-* If it doesn't exists, it will just load the default 'postratings-css.css' that comes with WP-PostRatings.
-* This will allow you to upgrade WP-PostRatings without worrying about overwriting your ratings styles that you have created.
+### How Does wp-postratings-pretty Load CSS?
+* wp-postratings-pretty will load `postratings-css.css` from your theme's CSS directory if it exists.
+* If it doesn't exists, it will just load the default 'postratings-css.css' that comes with wp-postratings-pretty.
+* This will allow you to upgrade wp-postratings-pretty without worrying about overwriting your ratings styles that you have created.
 
 ### How To Use Ratings Stats With Widgets?
 1. Go to `WP-Admin -> Appearance -> Widgets`

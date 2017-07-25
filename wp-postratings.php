@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: WP-PostRatings-Pretty
-Plugin URI:  https://github.com/plenge/wp-postratings
+Plugin Name: wp-postratings-pretty-Pretty
+Plugin URI:  https://github.com/plenge/wp-postratings-pretty
 Description: Adds an AJAX rating system for your WordPress site's content.
 Version:     1.0
 Author:      Jakob Plenge / Lester Chan
 Author URI:  http://lesterchan.net
-Text Domain: wp-postratings-pretty
+Text Domain: wp-postratings-pretty-pretty
 */
 
 
@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Plugin version
- * Set wp-postratings plugin version.
+ * Set wp-postratings-pretty plugin version.
  */
 define( 'WP_POSTRATINGS_VERSION', 1.84 );
 
@@ -98,7 +98,7 @@ function the_ratings($start_tag = 'div', $custom_id = 0, $display = true) {
     $postratings_ajax_style = get_option('postratings_ajax_style');
     if(intval($postratings_ajax_style['loading']) == 1) {
         $loading = '<' . $start_tag . ' id="post-ratings-' . $ratings_id . '-loading" class="post-ratings-loading">
-            <img src="' . plugins_url('wp-postratings/images/loading.gif') . '" width="16" height="16" class="post-ratings-image" />' . esc_html__( 'Loading...', 'wp-postratings' ) . '</' . $start_tag . '>';
+            <img src="' . plugins_url('wp-postratings-pretty/images/loading.gif') . '" width="16" height="16" class="post-ratings-image" />' . esc_html__( 'Loading...', 'wp-postratings-pretty' ) . '</' . $start_tag . '>';
     } else {
         $loading = '';
     }
@@ -323,7 +323,7 @@ function comment_author_ratings($comment_author_specific = '', $display = true) 
                     $comment_author_rating = '+'.$comment_author_rating;
                 }
             }
-            $image_alt = sprintf(__('%s gives a rating of %s', 'wp-postratings'), $comment_author, $comment_author_rating);
+            $image_alt = sprintf(__('%s gives a rating of %s', 'wp-postratings-pretty'), $comment_author, $comment_author_rating);
             $post_ratings_images = get_ratings_images_comment_author($ratings_custom, $ratings_max, $comment_author_rating, $ratings_image, $image_alt);
         }
         if($display) {
@@ -362,7 +362,7 @@ function comment_author_ratings_filter($comment_text) {
                             $comment_author_rating = '+'.$comment_author_rating;
                         }
                     }
-                    $image_alt = sprintf(__('%s gives a rating of %s', 'wp-postratings'), $comment_author, $comment_author_rating);
+                    $image_alt = sprintf(__('%s gives a rating of %s', 'wp-postratings-pretty'), $comment_author, $comment_author_rating);
                     $post_ratings_images = get_ratings_images_comment_author($ratings_custom, $ratings_max, $comment_author_rating, $ratings_image, $image_alt);
                 }
                 $output .= '<div class="post-ratings-comment-author">';
@@ -399,7 +399,7 @@ if(!function_exists('get_ipaddress')) {
 ### Function: Return All Images From A Rating Image Folder
 function ratings_images_folder($folder_name) {
     $normal_images = array('rating_over.'.RATINGS_IMG_EXT, 'rating_on.'.RATINGS_IMG_EXT, 'rating_half.'.RATINGS_IMG_EXT, 'rating_off.'.RATINGS_IMG_EXT);
-    $postratings_path = WP_PLUGIN_DIR.'/wp-postratings/images/'.$folder_name;
+    $postratings_path = WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$folder_name;
     $images_count = 1;
     $count = 0;
     $rating['max'] = 0;
@@ -466,7 +466,7 @@ if(!function_exists('snippet_text')) {
 ### Function: Process Post Excerpt, For Some Reasons, The Default get_post_excerpt() Does Not Work As Expected
 function ratings_post_excerpt($post_id, $post_excerpt, $post_content) {
     if( post_password_required( $post_id ) ) {
-        return esc_html__( 'There is no excerpt because this is a protected post.', 'wp-postratings' );
+        return esc_html__( 'There is no excerpt because this is a protected post.', 'wp-postratings-pretty' );
     }
     if(empty($post_excerpt)) {
         return snippet_text( strip_tags( strip_shortcodes( $post_content ) ), 200 );
@@ -515,7 +515,7 @@ function process_ratings() {
         // Verify Referer
         if(!check_ajax_referer('postratings_'.$post_id.'-nonce', 'postratings_'.$post_id.'_nonce', false))
         {
-            esc_html_e('Failed To Verify Referrer', 'wp-postratings');
+            esc_html_e('Failed To Verify Referrer', 'wp-postratings-pretty');
             exit();
         }
 
@@ -560,7 +560,7 @@ function process_ratings() {
                     } elseif(!empty($_COOKIE['comment_author_'.COOKIEHASH])) {
                         $rate_user = addslashes($_COOKIE['comment_author_'.COOKIEHASH]);
                     } else {
-                        $rate_user = __('Guest', 'wp-postratings');
+                        $rate_user = __('Guest', 'wp-postratings-pretty');
                     }
                     $rate_user = apply_filters( 'wp_postratings_process_ratings_user', $rate_user );
                     $rate_userid = apply_filters( 'wp_postratings_process_ratings_userid', intval( $user_ID ) );
@@ -578,11 +578,11 @@ function process_ratings() {
                     echo the_ratings_results($post_id, $post_ratings_users, $post_ratings_score, $post_ratings_average);
                     exit();
                 } else {
-                    printf(esc_html__('Invalid Post ID (#%s).', 'wp-postratings'), $post_id);
+                    printf(esc_html__('Invalid Post ID (#%s).', 'wp-postratings-pretty'), $post_id);
                     exit();
                 } // End if($post)
             } else {
-                printf(esc_html__('You Had Already Rated This Post. Post ID #%s.', 'wp-postratings'), $post_id);
+                printf(esc_html__('You Had Already Rated This Post. Post ID #%s.', 'wp-postratings-pretty'), $post_id);
                 exit();
             }// End if(!$rated)
         } // End if($rate && $post_id && check_allowtorate())
@@ -597,11 +597,11 @@ function manage_ratings()
     ### Form Processing
     if(isset($_GET['action']) && $_GET['action'] == 'postratings-admin')
     {
-        check_ajax_referer('wp-postratings_option_update_individual_rating');
+        check_ajax_referer('wp-postratings-pretty_option_update_individual_rating');
 
         //Variables
-        $postratings_url = plugins_url('wp-postratings/images');
-        $postratings_path = WP_PLUGIN_DIR.'/wp-postratings/images';
+        $postratings_url = plugins_url('wp-postratings-pretty/images');
+        $postratings_path = WP_PLUGIN_DIR.'/wp-postratings-pretty/images';
         $postratings_ratingstext = get_option('postratings_ratingstext');
         $postratings_ratingsvalue = get_option('postratings_ratingsvalue');
 
@@ -614,14 +614,14 @@ function manage_ratings()
         if($postratings_customrating && $postratings_max == 2) {
             $postratings_ratingsvalue[0] = -1;
             $postratings_ratingsvalue[1] = 1;
-            $postratings_ratingstext[0] = __('Vote Down', 'wp-postratings');
-            $postratings_ratingstext[1] = __('Vote Up', 'wp-postratings');
+            $postratings_ratingstext[0] = __('Vote Down', 'wp-postratings-pretty');
+            $postratings_ratingstext[1] = __('Vote Up', 'wp-postratings-pretty');
         } else {
             for($i = 0; $i < $postratings_max; $i++) {
                 if($i > 0) {
-                    $postratings_ratingstext[$i] = sprintf(esc_html__('%s Stars', 'wp-postratings'), number_format_i18n($i+1));
+                    $postratings_ratingstext[$i] = sprintf(esc_html__('%s Stars', 'wp-postratings-pretty'), number_format_i18n($i+1));
                 } else {
-                    $postratings_ratingstext[$i] = sprintf(esc_html__('%s Star', 'wp-postratings'), number_format_i18n($i+1));
+                    $postratings_ratingstext[$i] = sprintf(esc_html__('%s Star', 'wp-postratings-pretty'), number_format_i18n($i+1));
                 }
                 $postratings_ratingsvalue[$i] = $i+1;
             }
@@ -630,9 +630,9 @@ function manage_ratings()
         <table class="form-table">
             <thead>
                 <tr>
-                    <th><?php esc_html_e('Rating Image', 'wp-postratings'); ?></th>
-                    <th><?php esc_html_e('Rating Text', 'wp-postratings'); ?></th>
-                    <th><?php esc_html_e('Rating Value', 'wp-postratings'); ?></th>
+                    <th><?php esc_html_e('Rating Image', 'wp-postratings-pretty'); ?></th>
+                    <th><?php esc_html_e('Rating Text', 'wp-postratings-pretty'); ?></th>
+                    <th><?php esc_html_e('Rating Value', 'wp-postratings-pretty'); ?></th>
                 </tr>
             </thead>
             <tbody>
@@ -795,83 +795,83 @@ function postratings_wp_stats() {
 }
 
 
-### Function: Add WP-PostRatings General Stats To WP-Stats Page Options
+### Function: Add wp-postratings-pretty General Stats To WP-Stats Page Options
 function postratings_page_admin_general_stats($content) {
     $stats_display = get_option('stats_display');
     if($stats_display['ratings'] == 1) {
-        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_ratings" value="ratings" checked="checked" />&nbsp;&nbsp;<label for="wpstats_ratings">'.esc_html__('WP-PostRatings', 'wp-postratings').'</label><br />'."\n";
+        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_ratings" value="ratings" checked="checked" />&nbsp;&nbsp;<label for="wpstats_ratings">'.esc_html__('wp-postratings-pretty', 'wp-postratings-pretty').'</label><br />'."\n";
     } else {
-        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_ratings" value="ratings" />&nbsp;&nbsp;<label for="wpstats_ratings">'.esc_html__('WP-PostRatings', 'wp-postratings').'</label><br />'."\n";
+        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_ratings" value="ratings" />&nbsp;&nbsp;<label for="wpstats_ratings">'.esc_html__('wp-postratings-pretty', 'wp-postratings-pretty').'</label><br />'."\n";
     }
     return $content;
 }
 
 
-### Function: Add WP-PostRatings Top Most/Highest Stats To WP-Stats Page Options
+### Function: Add wp-postratings-pretty Top Most/Highest Stats To WP-Stats Page Options
 function postratings_page_admin_most_stats($content) {
     $stats_display = get_option('stats_display');
     $stats_mostlimit = intval(get_option('stats_mostlimit'));
     if($stats_display['rated_highest_post'] == 1) {
-        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest_post" value="rated_highest_post" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_highest_post">'.esc_html(sprintf(_n('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
+        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest_post" value="rated_highest_post" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_highest_post">'.esc_html(sprintf(_n('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings-pretty'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
     } else {
-        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest_post" value="rated_highest_post" />&nbsp;&nbsp;<label for="wpstats_rated_highest_post">'.esc_html(sprintf(_n('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
+        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest_post" value="rated_highest_post" />&nbsp;&nbsp;<label for="wpstats_rated_highest_post">'.esc_html(sprintf(_n('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings-pretty'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
     }
     if($stats_display['rated_highest_page'] == 1) {
-        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest_page" value="rated_highest_page" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_highest_page">'.esc_html(sprintf(_n('%s Highest Rated Page', '%s Highest Rated Pages', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
+        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest_page" value="rated_highest_page" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_highest_page">'.esc_html(sprintf(_n('%s Highest Rated Page', '%s Highest Rated Pages', $stats_mostlimit, 'wp-postratings-pretty'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
     } else {
-        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest_page" value="rated_highest_page" />&nbsp;&nbsp;<label for="wpstats_rated_highest_page">'.esc_html(sprintf(_n('%s Highest Rated Page', '%s Highest Rated Pages', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
+        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_highest_page" value="rated_highest_page" />&nbsp;&nbsp;<label for="wpstats_rated_highest_page">'.esc_html(sprintf(_n('%s Highest Rated Page', '%s Highest Rated Pages', $stats_mostlimit, 'wp-postratings-pretty'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
     }
     if($stats_display['rated_most_post'] == 1) {
-        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most_post" value="rated_most_post" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_most_post">'.esc_html(sprintf(_n('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
+        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most_post" value="rated_most_post" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_most_post">'.esc_html(sprintf(_n('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings-pretty'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
     } else {
-        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most_post" value="rated_most_post" />&nbsp;&nbsp;<label for="wpstats_rated_most_post">'.esc_html(sprintf(_n('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
+        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most_post" value="rated_most_post" />&nbsp;&nbsp;<label for="wpstats_rated_most_post">'.esc_html(sprintf(_n('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings-pretty'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
     }
     if($stats_display['rated_most_page'] == 1) {
-        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most_page" value="rated_most_page" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_most_page">'.esc_html(sprintf(_n('%s Most Rated Page', '%s Most Rated Pages', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
+        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most_page" value="rated_most_page" checked="checked" />&nbsp;&nbsp;<label for="wpstats_rated_most_page">'.esc_html(sprintf(_n('%s Most Rated Page', '%s Most Rated Pages', $stats_mostlimit, 'wp-postratings-pretty'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
     } else {
-        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most_page" value="rated_most_page" />&nbsp;&nbsp;<label for="wpstats_rated_most_page">'.esc_html(sprintf(_n('%s Most Rated Page', '%s Most Rated Pages', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
+        $content .= '<input type="checkbox" name="stats_display[]" id="wpstats_rated_most_page" value="rated_most_page" />&nbsp;&nbsp;<label for="wpstats_rated_most_page">'.esc_html(sprintf(_n('%s Most Rated Page', '%s Most Rated Pages', $stats_mostlimit, 'wp-postratings-pretty'), number_format_i18n($stats_mostlimit))).'</label><br />'."\n";
     }
     return $content;
 }
 
 
-### Function: Add WP-PostRatings General Stats To WP-Stats Page
+### Function: Add wp-postratings-pretty General Stats To WP-Stats Page
 function postratings_page_general_stats($content) {
     $stats_display = get_option('stats_display');
     if($stats_display['ratings'] == 1) {
-        $content .= '<p><strong>'.esc_html__('WP-PostRatings', 'wp-postratings').'</strong></p>'."\n";
+        $content .= '<p><strong>'.esc_html__('wp-postratings-pretty', 'wp-postratings-pretty').'</strong></p>'."\n";
         $content .= '<ul>'."\n";
-        $content .= '<li>'.esc_html(sprintf(_n('%s user casted his vote.', '%s users casted their vote.', get_ratings_users(false), 'wp-postratings'), '<strong>'.number_format_i18n(get_ratings_users(false)).'</strong>')).'</li>'."\n";
+        $content .= '<li>'.esc_html(sprintf(_n('%s user casted his vote.', '%s users casted their vote.', get_ratings_users(false), 'wp-postratings-pretty'), '<strong>'.number_format_i18n(get_ratings_users(false)).'</strong>')).'</li>'."\n";
         $content .= '</ul>'."\n";
     }
     return $content;
 }
 
 
-### Function: Add WP-PostRatings Top Most/Highest Stats To WP-Stats Page
+### Function: Add wp-postratings-pretty Top Most/Highest Stats To WP-Stats Page
 function postratings_page_most_stats($content) {
     $stats_display = get_option('stats_display');
     $stats_mostlimit = intval(get_option('stats_mostlimit'));
     if($stats_display['rated_highest_post'] == 1) {
-        $content .= '<p><strong>'.sprintf(_n('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
+        $content .= '<p><strong>'.sprintf(_n('%s Highest Rated Post', '%s Highest Rated Posts', $stats_mostlimit, 'wp-postratings-pretty'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
         $content .= '<ul>'."\n";
         $content .= get_highest_rated('post', 0, $stats_mostlimit, 0, false);
         $content .= '</ul>'."\n";
     }
     if($stats_display['rated_highest_page'] == 1) {
-        $content .= '<p><strong>'.sprintf(_n('%s Highest Rated Page', '%s Highest Rated Pages', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
+        $content .= '<p><strong>'.sprintf(_n('%s Highest Rated Page', '%s Highest Rated Pages', $stats_mostlimit, 'wp-postratings-pretty'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
         $content .= '<ul>'."\n";
         $content .= get_highest_rated('page', 0, $stats_mostlimit, 0, false);
         $content .= '</ul>'."\n";
     }
     if($stats_display['rated_most_post'] == 1) {
-        $content .= '<p><strong>'.sprintf(_n('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
+        $content .= '<p><strong>'.sprintf(_n('%s Most Rated Post', '%s Most Rated Posts', $stats_mostlimit, 'wp-postratings-pretty'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
         $content .= '<ul>'."\n";
         $content .= get_most_rated('post', 0, $stats_mostlimit, 0, false);
         $content .= '</ul>'."\n";
     }
     if($stats_display['rated_most_page'] == 1) {
-        $content .= '<p><strong>'.sprintf(_n('%s Most Rated Page', '%s Most Rated Pages', $stats_mostlimit, 'wp-postratings'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
+        $content .= '<p><strong>'.sprintf(_n('%s Most Rated Page', '%s Most Rated Pages', $stats_mostlimit, 'wp-postratings-pretty'), number_format_i18n($stats_mostlimit)).'</strong></p>'."\n";
         $content .= '<ul>'."\n";
         $content .= get_most_rated('page', 0, $stats_mostlimit, 0, false);
         $content .= '</ul>'."\n";
@@ -886,44 +886,44 @@ function get_ratings_images($ratings_custom, $ratings_max, $post_rating, $rating
     $image_alt = esc_attr( $image_alt );
     $ratings_image = esc_attr( $ratings_image );
     $image_alt = apply_filters( 'wp_postratings_ratings_image_alt', $image_alt );
-    if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT)) {
-        $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
-    } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT)) {
-        $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+    if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT)) {
+        $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+    } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT)) {
+        $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
     }
     if($ratings_custom) {
         for($i=1; $i <= $ratings_max; $i++) {
             if($i <= $post_rating) {
-                $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+                $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$i.'_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
             } elseif($i == $insert_half) {
-                if (is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half-rtl.'.RATINGS_IMG_EXT)) {
-                    $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half-rtl.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+                if (is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$i.'_half-rtl.'.RATINGS_IMG_EXT)) {
+                    $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$i.'_half-rtl.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
                 } else {
-                    $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+                    $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$i.'_half.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
                 }
             } else {
-                $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+                $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$i.'_off.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
             }
         }
     } else {
         for($i=1; $i <= $ratings_max; $i++) {
             if($i <= $post_rating) {
-                $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+                $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
             } elseif($i == $insert_half) {
-                if (is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_half-rtl.'.RATINGS_IMG_EXT)) {
-                    $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_half-rtl.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+                if (is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_half-rtl.'.RATINGS_IMG_EXT)) {
+                    $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_half-rtl.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
                 } else {
-                    $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_half.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+                    $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_half.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
                 }
             } else {
-                $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_off.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+                $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_off.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
             }
         }
     }
-    if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT)) {
-        $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
-    } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT)) {
-        $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+    if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT)) {
+        $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+    } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT)) {
+        $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
     }
     return $ratings_images;
 }
@@ -933,14 +933,14 @@ function get_ratings_images($ratings_custom, $ratings_max, $post_rating, $rating
 function get_ratings_images_vote($post_id, $ratings_custom, $ratings_max, $post_rating, $ratings_image, $image_alt, $insert_half, $ratings_texts) {
     $ratings_images = '';
     $ratings_image = esc_attr( $ratings_image );
-    if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT)) {
-        $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
-    } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT)) {
-        $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+    if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT)) {
+        $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+    } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT)) {
+        $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
     }
     if($ratings_custom) {
         for($i=1; $i <= $ratings_max; $i++) {
-            if (is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'half-rtl.'.RATINGS_IMG_EXT)) {
+            if (is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$i.'half-rtl.'.RATINGS_IMG_EXT)) {
                 $use_half_rtl = 1;
             } else {
                 $use_half_rtl = 0;
@@ -949,19 +949,19 @@ function get_ratings_images_vote($post_id, $ratings_custom, $ratings_max, $post_
             $ratings_text_js = esc_js( $ratings_text );
             $image_alt = apply_filters( 'wp_postratings_ratings_image_alt', $ratings_text );
             if($i <= $post_rating) {
-                $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
+                $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$i.'_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
             } elseif($i == $insert_half) {
                 if ($use_half_rtl) {
-                    $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half-rtl.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
+                    $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$i.'_half-rtl.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
                 } else {
-                    $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_half.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
+                    $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$i.'_half.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
                 }
             } else {
-                $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
+                $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$i.'_off.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
             }
         }
     } else {
-        if (is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_half-rtl.'.RATINGS_IMG_EXT)) {
+        if (is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_half-rtl.'.RATINGS_IMG_EXT)) {
             $use_half_rtl = 1;
         } else {
             $use_half_rtl = 0;
@@ -971,22 +971,22 @@ function get_ratings_images_vote($post_id, $ratings_custom, $ratings_max, $post_
             $ratings_text_js = esc_js( $ratings_text );
             $image_alt = apply_filters( 'wp_postratings_ratings_image_alt', $ratings_text );
             if($i <= $post_rating) {
-                $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
+                $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
             } elseif($i == $insert_half) {
                 if ($use_half_rtl) {
-                    $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_half-rtl.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
+                    $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_half-rtl.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
                 } else {
-                    $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_half.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
+                    $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_half.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
                 }
             } else {
-                $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_off.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
+                $ratings_images .= '<img id="rating_'.$post_id.'_'.$i.'" src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_off.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" onmouseover="current_rating('.$post_id.', '.$i.', \''.$ratings_text_js.'\');" onmouseout="ratings_off('.$post_rating.', '.$insert_half.', '.$use_half_rtl.');" onclick="rate_post();" onkeypress="rate_post();" style="cursor: pointer; border: 0px;" />';
             }
         }
     }
-    if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT)) {
-        $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
-    } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT)) {
-        $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+    if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT)) {
+        $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+    } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT)) {
+        $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
     }
     return $ratings_images;
 }
@@ -997,38 +997,38 @@ function get_ratings_images_comment_author($ratings_custom, $ratings_max, $comme
     $ratings_images = '';
     $image_alt = esc_attr( $image_alt );
     $ratings_image = esc_attr( $ratings_image );
-    if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT)) {
-        $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
-    } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT)) {
-        $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+    if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT)) {
+        $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+    } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT)) {
+        $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
     }
     if($ratings_custom && $ratings_max == 2) {
         if($comment_author_rating > 0) {
-            $ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_2_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+            $ratings_images .= '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_2_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
         } else {
-            $ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_1_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+            $ratings_images .= '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_1_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
         }
     } elseif($ratings_custom) {
         for($i=1; $i <= $ratings_max; $i++) {
             if($i <= $comment_author_rating) {
-                $ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+                $ratings_images .= '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$i.'_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
             } else {
-                $ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$i.'_off.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+                $ratings_images .= '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$i.'_off.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
             }
         }
     } else {
         for($i=1; $i <= $ratings_max; $i++) {
             if($i <= $comment_author_rating) {
-                $ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+                $ratings_images .= '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
             } else {
-                $ratings_images .= '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_off.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
+                $ratings_images .= '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_off.'.RATINGS_IMG_EXT).'" alt="'.$image_alt.'" title="'.$image_alt.'" class="post-ratings-image" />';
             }
         }
     }
-    if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT)) {
-        $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
-    } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT)) {
-        $ratings_images .= '<img src="'.plugins_url('/wp-postratings/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+    if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT)) {
+        $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+    } elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT)) {
+        $ratings_images .= '<img src="'.plugins_url('/wp-postratings-pretty/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
     }
     return $ratings_images;
 }
@@ -1085,10 +1085,10 @@ function expand_ratings_template($template, $post_data, $post_ratings_data = nul
         if($post_ratings_score > 0) {
             $post_ratings_score = '+'.$post_ratings_score;
         }
-        $post_ratings_alt_text = esc_html(sprintf(_n('%s rating', '%s ratings', $post_ratings_score, 'wp-postratings'), number_format_i18n($post_ratings_score)).__(',', 'wp-postratings').' '.sprintf(_n('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)));
+        $post_ratings_alt_text = esc_html(sprintf(_n('%s rating', '%s ratings', $post_ratings_score, 'wp-postratings-pretty'), number_format_i18n($post_ratings_score)).__(',', 'wp-postratings-pretty').' '.sprintf(_n('%s vote', '%s votes', $post_ratings_users, 'wp-postratings-pretty'), number_format_i18n($post_ratings_users)));
     } else {
         $post_ratings_score = number_format_i18n($post_ratings_score);
-        $post_ratings_alt_text = esc_html(sprintf(_n('%s vote', '%s votes', $post_ratings_users, 'wp-postratings'), number_format_i18n($post_ratings_users)).__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': '.number_format_i18n($post_ratings_average, 2).' '.__('out of', 'wp-postratings').' '.number_format_i18n($ratings_max));
+        $post_ratings_alt_text = esc_html(sprintf(_n('%s vote', '%s votes', $post_ratings_users, 'wp-postratings-pretty'), number_format_i18n($post_ratings_users)).__(',', 'wp-postratings-pretty').' '.__('average', 'wp-postratings-pretty').': '.number_format_i18n($post_ratings_average, 2).' '.__('out of', 'wp-postratings-pretty').' '.number_format_i18n($ratings_max));
     }
     // Check for half star
     $insert_half = 0;

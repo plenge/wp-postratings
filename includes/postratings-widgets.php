@@ -1,9 +1,9 @@
 <?php
 /**
- * WP-PostRatings Widgets.
+ * wp-postratings-pretty Widgets.
  *
  * @package WordPress
- * @subpackage WP-PostRatings Plugin
+ * @subpackage wp-postratings-pretty Plugin
  */
 
 
@@ -16,16 +16,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-### Class: WP-PostRatings Widget
+### Class: wp-postratings-pretty Widget
 class WP_Widget_PostRatings extends WP_Widget {
 
     // Constructor
     function __construct() {
         parent::__construct(
 			'ratings-widget',
-			esc_html__('Ratings', 'wp-postratings'),
+			esc_html__('Ratings', 'wp-postratings-pretty'),
 			array(
-				'description' => esc_html__('WP-PostRatings ratings statistics', 'wp-postratings')
+				'description' => esc_html__('wp-postratings-pretty ratings statistics', 'wp-postratings-pretty')
 			)
 		);
     }
@@ -113,7 +113,7 @@ class WP_Widget_PostRatings extends WP_Widget {
     // Display Widget Control Form
     function form($instance) {
         global $wpdb;
-        $instance = wp_parse_args((array) $instance, array('title' => esc_html__('Ratings', 'wp-postratings'), 'type' => 'highest_rated', 'mode' => '', 'limit' => 10, 'min_votes' => 0, 'chars' => 200, 'cat_ids' => '0', 'time_range' => '1 day'));
+        $instance = wp_parse_args((array) $instance, array('title' => esc_html__('Ratings', 'wp-postratings-pretty'), 'type' => 'highest_rated', 'mode' => '', 'limit' => 10, 'min_votes' => 0, 'chars' => 200, 'cat_ids' => '0', 'time_range' => '1 day'));
         $title = esc_attr($instance['title']);
         $type = esc_attr($instance['type']);
         $mode = trim( esc_attr( $instance['mode'] ) );
@@ -127,77 +127,77 @@ class WP_Widget_PostRatings extends WP_Widget {
         ) );
 ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Title:', 'wp-postratings'); ?></label>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php esc_html_e('Title:', 'wp-postratings-pretty'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('type'); ?>"><?php esc_html_e('Statistics Type:', 'wp-postratings'); ?></label>
+            <label for="<?php echo $this->get_field_id('type'); ?>"><?php esc_html_e('Statistics Type:', 'wp-postratings-pretty'); ?></label>
 			<select name="<?php echo $this->get_field_name('type'); ?>" id="<?php echo $this->get_field_id('type'); ?>" class="widefat">
-				<option value="most_rated"<?php selected('most_rated', $type); ?>><?php esc_html_e('Most Rated', 'wp-postratings'); ?></option>
-				<option value="most_rated_category"<?php selected('most_rated_category', $type); ?>><?php esc_html_e('Most Rated By Category', 'wp-postratings'); ?></option>
-				<option value="most_rated_range"<?php selected('most_rated_range', $type); ?>><?php esc_html_e('Most Rated By Time Range', 'wp-postratings'); ?></option>
-				<option value="most_rated_range_category"<?php selected('most_rated_range_category', $type); ?>><?php esc_html_e('Most Rated By Time Range And Category', 'wp-postratings'); ?></option>
+				<option value="most_rated"<?php selected('most_rated', $type); ?>><?php esc_html_e('Most Rated', 'wp-postratings-pretty'); ?></option>
+				<option value="most_rated_category"<?php selected('most_rated_category', $type); ?>><?php esc_html_e('Most Rated By Category', 'wp-postratings-pretty'); ?></option>
+				<option value="most_rated_range"<?php selected('most_rated_range', $type); ?>><?php esc_html_e('Most Rated By Time Range', 'wp-postratings-pretty'); ?></option>
+				<option value="most_rated_range_category"<?php selected('most_rated_range_category', $type); ?>><?php esc_html_e('Most Rated By Time Range And Category', 'wp-postratings-pretty'); ?></option>
 				<optgroup>&nbsp;</optgroup>
-				<option value="highest_rated"<?php selected('highest_rated', $type); ?>><?php esc_html_e('Highest Rated', 'wp-postratings'); ?></option>
-				<option value="highest_rated_category"<?php selected('highest_rated_category', $type); ?>><?php esc_html_e('Highest Rated By Category', 'wp-postratings'); ?></option>
-				<option value="highest_rated_range"<?php selected('highest_rated_range', $type); ?>><?php esc_html_e('Highest Rated By Time Range', 'wp-postratings'); ?></option>
-				<option value="highest_rated_range_category"<?php selected('highest_rated_range_category', $type); ?>><?php esc_html_e('Highest Rated By Time Range And Category', 'wp-postratings'); ?></option>
+				<option value="highest_rated"<?php selected('highest_rated', $type); ?>><?php esc_html_e('Highest Rated', 'wp-postratings-pretty'); ?></option>
+				<option value="highest_rated_category"<?php selected('highest_rated_category', $type); ?>><?php esc_html_e('Highest Rated By Category', 'wp-postratings-pretty'); ?></option>
+				<option value="highest_rated_range"<?php selected('highest_rated_range', $type); ?>><?php esc_html_e('Highest Rated By Time Range', 'wp-postratings-pretty'); ?></option>
+				<option value="highest_rated_range_category"<?php selected('highest_rated_range_category', $type); ?>><?php esc_html_e('Highest Rated By Time Range And Category', 'wp-postratings-pretty'); ?></option>
 				<optgroup>&nbsp;</optgroup>
-				<option value="lowest_rated"<?php selected('lowest_rated', $type); ?>><?php esc_html_e('Lowest Rated', 'wp-postratings'); ?></option>
-				<option value="lowest_rated_category"<?php selected('lowest_rated_category', $type); ?>><?php esc_html_e('Lowest Rated By Category', 'wp-postratings'); ?></option>
-				<option value="lowest_rated_range"<?php selected('lowest_rated_range', $type); ?>><?php esc_html_e('Lowest Rated By Time Range', 'wp-postratings'); ?></option>
+				<option value="lowest_rated"<?php selected('lowest_rated', $type); ?>><?php esc_html_e('Lowest Rated', 'wp-postratings-pretty'); ?></option>
+				<option value="lowest_rated_category"<?php selected('lowest_rated_category', $type); ?>><?php esc_html_e('Lowest Rated By Category', 'wp-postratings-pretty'); ?></option>
+				<option value="lowest_rated_range"<?php selected('lowest_rated_range', $type); ?>><?php esc_html_e('Lowest Rated By Time Range', 'wp-postratings-pretty'); ?></option>
 				<optgroup>&nbsp;</optgroup>
-				<option value="highest_score"<?php selected('highest_score', $type); ?>><?php esc_html_e('Highest Score', 'wp-postratings'); ?></option>
-				<option value="highest_score_category"<?php selected('highest_score_category', $type); ?>><?php esc_html_e('Highest Score By Category', 'wp-postratings'); ?></option>
-				<option value="highest_score_range"<?php selected('highest_score_range', $type); ?>><?php esc_html_e('Highest Score By Time Range', 'wp-postratings'); ?></option>
-				<option value="highest_score_range_category"<?php selected('highest_score_range_category', $type); ?>><?php esc_html_e('Highest Score By Time Range And Category', 'wp-postratings'); ?></option>
+				<option value="highest_score"<?php selected('highest_score', $type); ?>><?php esc_html_e('Highest Score', 'wp-postratings-pretty'); ?></option>
+				<option value="highest_score_category"<?php selected('highest_score_category', $type); ?>><?php esc_html_e('Highest Score By Category', 'wp-postratings-pretty'); ?></option>
+				<option value="highest_score_range"<?php selected('highest_score_range', $type); ?>><?php esc_html_e('Highest Score By Time Range', 'wp-postratings-pretty'); ?></option>
+				<option value="highest_score_range_category"<?php selected('highest_score_range_category', $type); ?>><?php esc_html_e('Highest Score By Time Range And Category', 'wp-postratings-pretty'); ?></option>
 			</select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('mode'); ?>"><?php esc_html_e('Include Ratings From:', 'wp-postratings'); ?></label>
+            <label for="<?php echo $this->get_field_id('mode'); ?>"><?php esc_html_e('Include Ratings From:', 'wp-postratings-pretty'); ?></label>
 			<select name="<?php echo $this->get_field_name('mode'); ?>" id="<?php echo $this->get_field_id('mode'); ?>" class="widefat">
-				<option value=""<?php selected( '', $mode ); ?>><?php esc_html_e( 'All', 'wp-postratings' ); ?></option>
+				<option value=""<?php selected( '', $mode ); ?>><?php esc_html_e( 'All', 'wp-postratings-pretty' ); ?></option>
 					<?php if( $post_types > 0 ): ?>
 						<?php foreach( $post_types as $post_type ): ?>
-							<option value="<?php echo $post_type; ?>"<?php selected( $post_type, $mode ); ?>><?php printf( esc_html__( '%s Only', 'wp-postratings' ), ucfirst( $post_type ) ); ?></option>
+							<option value="<?php echo $post_type; ?>"<?php selected( $post_type, $mode ); ?>><?php printf( esc_html__( '%s Only', 'wp-postratings-pretty' ), ucfirst( $post_type ) ); ?></option>
 						<?php endforeach; ?>
 					<?php endif; ?>
 			</select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('limit'); ?>"><?php esc_html_e('No. Of Records To Show:', 'wp-postratings'); ?></label>
+            <label for="<?php echo $this->get_field_id('limit'); ?>"><?php esc_html_e('No. Of Records To Show:', 'wp-postratings-pretty'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('limit'); ?>" name="<?php echo $this->get_field_name('limit'); ?>" type="text" value="<?php echo $limit; ?>" />
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('min_votes'); ?>"><?php esc_html_e('Minimum Votes:', 'wp-postratings'); ?> <span style="color: red;">*</span></label>
+            <label for="<?php echo $this->get_field_id('min_votes'); ?>"><?php esc_html_e('Minimum Votes:', 'wp-postratings-pretty'); ?> <span style="color: red;">*</span></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('min_votes'); ?>" name="<?php echo $this->get_field_name('min_votes'); ?>" type="text" value="<?php echo $min_votes; ?>" size="4" />
-            <span class="description"><?php esc_html_e('The minimum number of votes, before the rating displayed.', 'wp-postratings'); ?></span>
+            <span class="description"><?php esc_html_e('The minimum number of votes, before the rating displayed.', 'wp-postratings-pretty'); ?></span>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('chars'); ?>"><?php esc_html_e('Maximum Title Length (Characters):', 'wp-postratings'); ?></label>
+            <label for="<?php echo $this->get_field_id('chars'); ?>"><?php esc_html_e('Maximum Title Length (Characters):', 'wp-postratings-pretty'); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('chars'); ?>" name="<?php echo $this->get_field_name('chars'); ?>" type="text" value="<?php echo $chars; ?>" />
-            <span class="description"><?php esc_html_e('<strong>0</strong> to disable.', 'wp-postratings'); ?></span>
+            <span class="description"><?php esc_html_e('<strong>0</strong> to disable.', 'wp-postratings-pretty'); ?></span>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('cat_ids'); ?>"><?php esc_html_e('Category IDs:', 'wp-postratings'); ?> <span style="color: red;">**</span></label>
+            <label for="<?php echo $this->get_field_id('cat_ids'); ?>"><?php esc_html_e('Category IDs:', 'wp-postratings-pretty'); ?> <span style="color: red;">**</span></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('cat_ids'); ?>" name="<?php echo $this->get_field_name('cat_ids'); ?>" type="text" value="<?php echo $cat_ids; ?>" />
-            <span class="description"><?php esc_html_e('Seperate mutiple categories with commas.', 'wp-postratings'); ?></span>
+            <span class="description"><?php esc_html_e('Seperate mutiple categories with commas.', 'wp-postratings-pretty'); ?></span>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('time_range'); ?>"><?php esc_html_e('Time Range:', 'wp-postratings'); ?> <span style="color: red;">**</span></label>
+            <label for="<?php echo $this->get_field_id('time_range'); ?>"><?php esc_html_e('Time Range:', 'wp-postratings-pretty'); ?> <span style="color: red;">**</span></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('time_range'); ?>" name="<?php echo $this->get_field_name('time_range'); ?>" type="text" value="<?php echo $time_range; ?>" />
-            <span class="description"><?php esc_html_e('Use values like <strong>1 day</strong>, <strong>2 weeks</strong>, <strong>1 month</strong>.', 'wp-postratings'); ?></span>
+            <span class="description"><?php esc_html_e('Use values like <strong>1 day</strong>, <strong>2 weeks</strong>, <strong>1 month</strong>.', 'wp-postratings-pretty'); ?></span>
         </p>
         <p style="color: red;">
-            <span class="description"><?php esc_html_e('* Time range statistics does not support Minimum Votes field, you can ignore that it.', 'wp-postratings'); ?></span><br />
-            <span class="description"><?php esc_html_e('** If you are not using any category or time range statistics, you can ignore it.', 'wp-postratings'); ?></span>
+            <span class="description"><?php esc_html_e('* Time range statistics does not support Minimum Votes field, you can ignore that it.', 'wp-postratings-pretty'); ?></span><br />
+            <span class="description"><?php esc_html_e('** If you are not using any category or time range statistics, you can ignore it.', 'wp-postratings-pretty'); ?></span>
         <p>
         <input type="hidden" id="<?php echo $this->get_field_id('submit'); ?>" name="<?php echo $this->get_field_name('submit'); ?>" value="1" />
 <?php
     }
 }
 
-### Function: Init WP-PostRatings Widget
+### Function: Init wp-postratings-pretty Widget
 function widget_ratings_init() {
     register_widget('WP_Widget_PostRatings');
 }

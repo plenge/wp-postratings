@@ -1,9 +1,9 @@
 <?php
 /**
- * WP-PostRatings Sortcodes.
+ * wp-postratings-pretty Sortcodes.
  *
  * @package WordPress
- * @subpackage WP-PostRatings Plugin
+ * @subpackage wp-postratings-pretty Plugin
  */
 
 
@@ -28,6 +28,6 @@ function ratings_shortcode( $atts ) {
 		return the_ratings( 'span', $id, false );
 	}
 
-	return esc_html__( 'Note: There is a rating embedded within this post, please visit this post to rate it.', 'wp-postratings' );
+	return esc_html__( 'Note: There is a rating embedded within this post, please visit this post to rate it.', 'wp-postratings-pretty' );
 }
 add_shortcode( 'ratings', 'ratings_shortcode' );

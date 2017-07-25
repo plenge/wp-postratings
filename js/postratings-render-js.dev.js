@@ -18,12 +18,12 @@
      'score': score   // (int) usually the value of ratings_score
      'avg': average   // (float) usually the value of ratings_average }
    @param max_rate the value corresponding to server-side option "postratings_max"
-   @param images_dir the base URL stars images a fetched from, ex: /wp-content/plugins/wp-postratings/images/
+   @param images_dir the base URL stars images a fetched from, ex: /wp-content/plugins/wp-postratings-pretty/images/
 
    @return the HTML markup
 
    @use the global variable wp_postratings.post_rating_images_dir as a fallback for post_rating_images_dir
-        Could be initialized by WP with wp_localize_script( 'wp-postratings', 'wp_postratings', ['images_dir' => FOO_PLUGIN_URL...] );
+        Could be initialized by WP with wp_localize_script( 'wp-postratings-pretty', 'wp_postratings', ['images_dir' => FOO_PLUGIN_URL...] );
 */
 function expand_ratings_template(rating, max_rate, images_dir) {
     var img_dir = images_dir || wp_postratings.images_dir;

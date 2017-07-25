@@ -1,9 +1,9 @@
 <?php
 /**
- * WP-PostRatings Activation Hooks.
+ * wp-postratings-pretty Activation Hooks.
  *
  * @package WordPress
- * @subpackage WP-PostRatings Plugin
+ * @subpackage wp-postratings-pretty Plugin
  */
 
 /**
@@ -55,26 +55,26 @@ function ratings_activate() {
 	// Add In Options (4 Records)
 	add_option('postratings_image', 'stars' );
 	add_option('postratings_max', '5' );
-	add_option('postratings_template_vote', '%RATINGS_IMAGES_VOTE% (<strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings').__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings').' %RATINGS_MAX%)<br />%RATINGS_TEXT%' );
-	add_option('postratings_template_text', '%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings').__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings').' %RATINGS_MAX%'.__(',', 'wp-postratings').' <strong>'.__('rated', 'wp-postratings').'</strong></em>)' );
-	add_option('postratings_template_none', '%RATINGS_IMAGES_VOTE% ('.__('No Ratings Yet', 'wp-postratings').')<br />%RATINGS_TEXT%' );
-	// Database Upgrade For WP-PostRatings 1.02
+	add_option('postratings_template_vote', '%RATINGS_IMAGES_VOTE% (<strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings-pretty').__(',', 'wp-postratings-pretty').' '.__('average', 'wp-postratings-pretty').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings-pretty').' %RATINGS_MAX%)<br />%RATINGS_TEXT%' );
+	add_option('postratings_template_text', '%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings-pretty').__(',', 'wp-postratings-pretty').' '.__('average', 'wp-postratings-pretty').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings-pretty').' %RATINGS_MAX%'.__(',', 'wp-postratings-pretty').' <strong>'.__('rated', 'wp-postratings-pretty').'</strong></em>)' );
+	add_option('postratings_template_none', '%RATINGS_IMAGES_VOTE% ('.__('No Ratings Yet', 'wp-postratings-pretty').')<br />%RATINGS_TEXT%' );
+	// Database Upgrade For wp-postratings-pretty 1.02
 	add_option('postratings_logging_method', '3' );
 	add_option('postratings_allowtorate', '2' );
-	// Database Uprade For WP-PostRatings 1.04
+	// Database Uprade For wp-postratings-pretty 1.04
 	maybe_add_column($wpdb->ratings, 'rating_userid', "ALTER TABLE $wpdb->ratings ADD rating_userid INT( 10 ) NOT NULL DEFAULT '0';");
-	// Database Uprade For WP-PostRatings 1.05
-	add_option('postratings_ratingstext', array(__('1 Star', 'wp-postratings'), __('2 Stars', 'wp-postratings'), __('3 Stars', 'wp-postratings'), __('4 Stars', 'wp-postratings'), __('5 Stars', 'wp-postratings')) );
-	add_option('postratings_template_highestrated', '<li><a href="%POST_URL%" title="%POST_TITLE%">%POST_TITLE%</a> %RATINGS_IMAGES% (%RATINGS_AVERAGE% '.__('out of', 'wp-postratings').' %RATINGS_MAX%)</li>' );
-	// Database Upgrade For WP-PostRatings 1.11
+	// Database Uprade For wp-postratings-pretty 1.05
+	add_option('postratings_ratingstext', array(__('1 Star', 'wp-postratings-pretty'), __('2 Stars', 'wp-postratings-pretty'), __('3 Stars', 'wp-postratings-pretty'), __('4 Stars', 'wp-postratings-pretty'), __('5 Stars', 'wp-postratings-pretty')) );
+	add_option('postratings_template_highestrated', '<li><a href="%POST_URL%" title="%POST_TITLE%">%POST_TITLE%</a> %RATINGS_IMAGES% (%RATINGS_AVERAGE% '.__('out of', 'wp-postratings-pretty').' %RATINGS_MAX%)</li>' );
+	// Database Upgrade For wp-postratings-pretty 1.11
 	add_option('postratings_ajax_style', array('loading' => 1, 'fading' => 1) );
-	// Database Upgrade For WP-PostRatings 1.20
+	// Database Upgrade For wp-postratings-pretty 1.20
 	add_option('postratings_ratingsvalue', array(1,2,3,4,5) );
 	add_option('postratings_customrating', 0 );
-	add_option('postratings_template_permission', '%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings').__(',', 'wp-postratings').' '.__('average', 'wp-postratings').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings').' %RATINGS_MAX%</em>)<br /><em>'.__('You need to be a registered member to rate this.', 'wp-postratings').'</em>' );
-	// Database Upgrade For WP-PostRatings 1.30
-	add_option('postratings_template_mostrated', '<li><a href="%POST_URL%"  title="%POST_TITLE%">%POST_TITLE%</a> - %RATINGS_USERS% '.__('votes', 'wp-postratings').'</li>' );
-	// Database Upgrade For WP-PostRatings 1.50
+	add_option('postratings_template_permission', '%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> '.__('votes', 'wp-postratings-pretty').__(',', 'wp-postratings-pretty').' '.__('average', 'wp-postratings-pretty').': <strong>%RATINGS_AVERAGE%</strong> '.__('out of', 'wp-postratings-pretty').' %RATINGS_MAX%</em>)<br /><em>'.__('You need to be a registered member to rate this.', 'wp-postratings-pretty').'</em>' );
+	// Database Upgrade For wp-postratings-pretty 1.30
+	add_option('postratings_template_mostrated', '<li><a href="%POST_URL%"  title="%POST_TITLE%">%POST_TITLE%</a> - %RATINGS_USERS% '.__('votes', 'wp-postratings-pretty').'</li>' );
+	// Database Upgrade For wp-postratings-pretty 1.50
 	delete_option('widget_ratings_highest_rated');
 	delete_option('widget_ratings_most_rated');
 

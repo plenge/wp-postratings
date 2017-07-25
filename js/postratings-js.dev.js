@@ -1,7 +1,7 @@
 /*
 +----------------------------------------------------------------+
 |																							|
-|	WordPress Plugin: WP-PostRatings								|
+|	WordPress Plugin: wp-postratings-pretty								|
 |	Copyright (c) 2012 Lester "GaMerZ" Chan									|
 |																							|
 |	File Written By:																	|
@@ -10,7 +10,7 @@
 |																							|
 |	File Information:																	|
 |	- Post Ratings Javascript File													|
-|	- wp-content/plugins/wp-postratings/postratings-js.php				|
+|	- wp-content/plugins/wp-postratings-pretty/postratings-js.php				|
 |																							|
 +----------------------------------------------------------------+
 */

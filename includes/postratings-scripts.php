@@ -1,9 +1,9 @@
 <?php
 /**
- * WP-PostRatings Scripts.
+ * wp-postratings-pretty Scripts.
  *
  * @package WordPress
- * @subpackage WP-PostRatings Plugin
+ * @subpackage wp-postratings-pretty Plugin
  */
 
 
@@ -27,26 +27,26 @@ function ratings_javascripts_header() {
 add_action('wp_enqueue_scripts', 'ratings_scripts');
 function ratings_scripts() {
     if( @file_exists( get_stylesheet_directory() . '/postratings-css.css' ) ) {
-        wp_enqueue_style( 'wp-postratings', get_stylesheet_directory_uri() . '/postratings-css.css', false, WP_POSTRATINGS_VERSION, 'all' );
+        wp_enqueue_style( 'wp-postratings-pretty', get_stylesheet_directory_uri() . '/postratings-css.css', false, WP_POSTRATINGS_VERSION, 'all' );
     } elseif( @file_exists( get_stylesheet_directory() . '/css/postratings-css.css' ) ) {
-        wp_enqueue_style( 'wp-postratings', get_stylesheet_directory_uri() . '/css/postratings-css.css', false, WP_POSTRATINGS_VERSION, 'all' );
+        wp_enqueue_style( 'wp-postratings-pretty', get_stylesheet_directory_uri() . '/css/postratings-css.css', false, WP_POSTRATINGS_VERSION, 'all' );
     } else {
-        wp_enqueue_style( 'wp-postratings', plugins_url( 'wp-postratings/css/postratings-css.css' ), false, WP_POSTRATINGS_VERSION, 'all' );
+        wp_enqueue_style( 'wp-postratings-pretty', plugins_url( 'wp-postratings-pretty/css/postratings-css.css' ), false, WP_POSTRATINGS_VERSION, 'all' );
     }
     if( is_rtl() ) {
         if( @file_exists( get_stylesheet_directory() .'/postratings-css-rtl.css' ) ) {
-            wp_enqueue_style( 'wp-postratings-rtl', get_stylesheet_directory_uri() . '/postratings-css-rtl.css', false, WP_POSTRATINGS_VERSION, 'all' );
+            wp_enqueue_style( 'wp-postratings-pretty-rtl', get_stylesheet_directory_uri() . '/postratings-css-rtl.css', false, WP_POSTRATINGS_VERSION, 'all' );
         } elseif( @file_exists( get_stylesheet_directory() .'/css/postratings-css-rtl.css' ) ) {
-            wp_enqueue_style( 'wp-postratings-rtl', get_stylesheet_directory_uri() . '/css/postratings-css-rtl.css', false, WP_POSTRATINGS_VERSION, 'all' );
+            wp_enqueue_style( 'wp-postratings-pretty-rtl', get_stylesheet_directory_uri() . '/css/postratings-css-rtl.css', false, WP_POSTRATINGS_VERSION, 'all' );
         } else {
-            wp_enqueue_style( 'wp-postratings-rtl', plugins_url( 'wp-postratings/css/postratings-css-rtl.css' ), false, WP_POSTRATINGS_VERSION, 'all' );
+            wp_enqueue_style( 'wp-postratings-pretty-rtl', plugins_url( 'wp-postratings-pretty/css/postratings-css-rtl.css' ), false, WP_POSTRATINGS_VERSION, 'all' );
         }
     }
     $postratings_max = intval( get_option( 'postratings_max' ) );
     $postratings_custom = intval( get_option( 'postratings_customrating' ) );
     $postratings_ajax_style = get_option( 'postratings_ajax_style' );
     $postratings_image = get_option( 'postratings_image' );
-    $postratings_plugins_url = plugins_url( 'wp-postratings' );
+    $postratings_plugins_url = plugins_url( 'wp-postratings-pretty' );
     $postratings_javascript = '';
     if($postratings_custom) {
         for($i = 1; $i <= $postratings_max; $i++) {
@@ -55,11 +55,11 @@ function ratings_scripts() {
     } else {
         $postratings_javascript = 'var ratings_mouseover_image=new Image();ratings_mouseover_image.src="' . $postratings_plugins_url . '/images/' . $postratings_image . '/rating_over.' . RATINGS_IMG_EXT . '";';
     }
-    wp_enqueue_script('wp-postratings', plugins_url('wp-postratings/js/postratings-js.js'), array('jquery'), WP_POSTRATINGS_VERSION, true);
-    wp_localize_script('wp-postratings', 'ratingsL10n', array(
+    wp_enqueue_script('wp-postratings-pretty', plugins_url('wp-postratings-pretty/js/postratings-js.js'), array('jquery'), WP_POSTRATINGS_VERSION, true);
+    wp_localize_script('wp-postratings-pretty', 'ratingsL10n', array(
         'plugin_url' => $postratings_plugins_url,
         'ajax_url' => admin_url('admin-ajax.php'),
-        'text_wait' => __('Please rate only 1 item at a time.', 'wp-postratings'),
+        'text_wait' => __('Please rate only 1 item at a time.', 'wp-postratings-pretty'),
         'image' => $postratings_image,
         'image_ext' => RATINGS_IMG_EXT,
         'max' => $postratings_max,
@@ -74,11 +74,11 @@ function ratings_scripts() {
 ### Function: Enqueue Ratings Stylesheets/JavaScripts In WP-Admin
 add_action('admin_enqueue_scripts', 'ratings_scripts_admin');
 function ratings_scripts_admin($hook_suffix) {
-    $postratings_admin_pages = array('wp-postratings/postratings-manager.php', 'wp-postratings/postratings-options.php', 'wp-postratings/postratings-templates.php', 'wp-postratings/postratings-uninstall.php');
+    $postratings_admin_pages = array('wp-postratings-pretty/postratings-manager.php', 'wp-postratings-pretty/postratings-options.php', 'wp-postratings-pretty/postratings-templates.php', 'wp-postratings-pretty/postratings-uninstall.php');
     if(in_array($hook_suffix, $postratings_admin_pages)) {
-        wp_enqueue_style('wp-postratings-admin', plugins_url('wp-postratings/css/postratings-admin-css.css'), false, WP_POSTRATINGS_VERSION, 'all');
-        wp_enqueue_script('wp-postratings-admin', plugins_url('wp-postratings/js/postratings-admin-js.js'), array('jquery'), WP_POSTRATINGS_VERSION, true);
-        wp_localize_script('wp-postratings-admin', 'ratingsAdminL10n', array(
+        wp_enqueue_style('wp-postratings-pretty-admin', plugins_url('wp-postratings-pretty/css/postratings-admin-css.css'), false, WP_POSTRATINGS_VERSION, 'all');
+        wp_enqueue_script('wp-postratings-pretty-admin', plugins_url('wp-postratings-pretty/js/postratings-admin-js.js'), array('jquery'), WP_POSTRATINGS_VERSION, true);
+        wp_localize_script('wp-postratings-pretty-admin', 'ratingsAdminL10n', array(
             'admin_ajax_url' => admin_url('admin-ajax.php')
         ));
     }

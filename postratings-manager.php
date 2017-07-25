@@ -1,9 +1,9 @@
 <?php
 /**
- * WP-PostRatings Logs.
+ * wp-postratings-pretty Logs.
  *
  * @package WordPress
- * @subpackage WP-PostRatings Plugin
+ * @subpackage wp-postratings-pretty Plugin
  */
 
 
@@ -21,11 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Check whether the user can manage ratings
  */
 if ( ! current_user_can( 'manage_ratings' ) ) {
-	wp_die( __( 'Access Denied', 'wp-postratings' ) );
+	wp_die( __( 'Access Denied', 'wp-postratings-pretty' ) );
 }
 
 
-$base_name                  = plugin_basename( 'wp-postratings/postratings-manager.php' );
+$base_name                  = plugin_basename( 'wp-postratings-pretty/postratings-manager.php' );
 $base_page                  = admin_url( 'admin.php?page=' . urlencode( $base_name ) );
 $postratings_sort_url       = '';
 $postratings_sortby_text    = '';
@@ -53,7 +53,7 @@ if ( isset( $_GET['order'] ) && in_array( $_GET['order'], array( 'asc', 'desc', 
 ### Form Processing
 if ( ! empty( $_POST['do'] ) ) {
 
-	check_admin_referer('wp-postratings_logs');
+	check_admin_referer('wp-postratings-pretty_logs');
 	$delete_datalog   = isset( $_POST['delete_datalog'] ) ? (int) $_POST['delete_datalog'] : 1;
 	$post_ids         = '';
 	$post_ids_list    = array();
@@ -77,17 +77,17 @@ if ( ! empty( $_POST['do'] ) ) {
 			if($post_ids == 'all') {
 				$delete_logs = $wpdb->query("DELETE FROM $wpdb->ratings");
 				if($delete_logs) {
-					$text = '<p style="color: green;">'.esc_html__('All Rating Logs Have Been Deleted.', 'wp-postratings').'</p>';
+					$text = '<p style="color: green;">'.esc_html__('All Rating Logs Have Been Deleted.', 'wp-postratings-pretty').'</p>';
 				} else {
-					$text = '<p style="color: red;">'.esc_html__('An Error Has Occured While Deleting All Rating Logs.', 'wp-postratings').'</p>';
+					$text = '<p style="color: red;">'.esc_html__('An Error Has Occured While Deleting All Rating Logs.', 'wp-postratings-pretty').'</p>';
 				}
 
 			} else {
 				$delete_logs = $wpdb->query( "DELETE FROM {$wpdb->ratings} WHERE rating_postid IN (" . $post_ids . ')' );
 				if($delete_logs) {
-					$text = '<p style="color: green;">'.sprintf(esc_html__('All Rating Logs For Post ID(s) %s Have Been Deleted.', 'wp-postratings'), $post_ids).'</p>';
+					$text = '<p style="color: green;">'.sprintf(esc_html__('All Rating Logs For Post ID(s) %s Have Been Deleted.', 'wp-postratings-pretty'), $post_ids).'</p>';
 				} else {
-					$text = '<p style="color: red;">'.sprintf(esc_html__('An Error Has Occured While Deleting All Rating Logs For Post ID(s) %s.', 'wp-postratings'), $post_ids).'</p>';
+					$text = '<p style="color: red;">'.sprintf(esc_html__('An Error Has Occured While Deleting All Rating Logs For Post ID(s) %s.', 'wp-postratings-pretty'), $post_ids).'</p>';
 				}
 			}
 			break;
@@ -97,7 +97,7 @@ if ( ! empty( $_POST['do'] ) ) {
 			if($post_ids == 'all') {
 				foreach($ratings_postmeta as $postmeta) {
 					$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->postmeta} WHERE meta_key = %s", $postmeta ) );
-					$text .= '<p style="color: green;">'.sprintf(esc_html__('Rating Data "%s" Has Been Deleted.', 'wp-postratings'), "<strong><em>$postmeta</em></strong>").'</p>';
+					$text .= '<p style="color: green;">'.sprintf(esc_html__('Rating Data "%s" Has Been Deleted.', 'wp-postratings-pretty'), "<strong><em>$postmeta</em></strong>").'</p>';
 				}
 
 			} else {
@@ -105,7 +105,7 @@ if ( ! empty( $_POST['do'] ) ) {
 					foreach( $ratings_postmeta as $meta_key ) {
 						delete_post_meta( $the_post_id, $meta_key );
 
-						$text .= '<p style="color: green;">'.sprintf(esc_html__('Rating Data "%s" For Post ID(s) %s Has Been Deleted.', 'wp-postratings'), "<strong><em>$meta_key</em></strong>", $post_ids).'</p>';
+						$text .= '<p style="color: green;">'.sprintf(esc_html__('Rating Data "%s" For Post ID(s) %s Has Been Deleted.', 'wp-postratings-pretty'), "<strong><em>$meta_key</em></strong>", $post_ids).'</p>';
 					}
 				}
 			}
@@ -115,30 +115,30 @@ if ( ! empty( $_POST['do'] ) ) {
 			if($post_ids == 'all') {
 				$delete_logs = $wpdb->query("DELETE FROM $wpdb->ratings");
 				if($delete_logs) {
-					$text = '<p style="color: green;">'.esc_html__('All Rating Logs Have Been Deleted.', 'wp-postratings').'</p>';
+					$text = '<p style="color: green;">'.esc_html__('All Rating Logs Have Been Deleted.', 'wp-postratings-pretty').'</p>';
 				} else {
-					$text = '<p style="color: red;">'.esc_html__('An Error Has Occured While Deleting All Rating Logs.', 'wp-postratings').'</p>';
+					$text = '<p style="color: red;">'.esc_html__('An Error Has Occured While Deleting All Rating Logs.', 'wp-postratings-pretty').'</p>';
 				}
 
 				// @todo Deleting meta records like will not clear the post's object cache
 				foreach($ratings_postmeta as $postmeta) {
 					$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->postmeta} WHERE meta_key = %s", $postmeta ) );
-					$text .= '<p style="color: green;">'.sprintf(esc_html__('Rating Data "%s" Has Been Deleted.', 'wp-postratings'), "<strong><em>$postmeta</em></strong>").'</p>';
+					$text .= '<p style="color: green;">'.sprintf(esc_html__('Rating Data "%s" Has Been Deleted.', 'wp-postratings-pretty'), "<strong><em>$postmeta</em></strong>").'</p>';
 				}
 
 			} else {
 				$delete_logs = $wpdb->query( "DELETE FROM {$wpdb->ratings} WHERE rating_postid IN (" . $post_ids . ')' );
 				if($delete_logs) {
-					$text = '<p style="color: green;">'.sprintf(esc_html__('All Rating Logs For Post ID(s) %s Have Been Deleted.', 'wp-postratings'), $post_ids).'</p>';
+					$text = '<p style="color: green;">'.sprintf(esc_html__('All Rating Logs For Post ID(s) %s Have Been Deleted.', 'wp-postratings-pretty'), $post_ids).'</p>';
 				} else {
-					$text = '<p style="color: red;">'.sprintf(esc_html__('An Error Has Occured While Deleting All Rating Logs For Post ID(s) %s.', 'wp-postratings'), $post_ids).'</p>';
+					$text = '<p style="color: red;">'.sprintf(esc_html__('An Error Has Occured While Deleting All Rating Logs For Post ID(s) %s.', 'wp-postratings-pretty'), $post_ids).'</p>';
 				}
 
 				foreach ( $post_ids_list as $the_post_id ) {
 					foreach( $ratings_postmeta as $meta_key ) {
 						delete_post_meta( $the_post_id, $meta_key );
 
-						$text .= '<p style="color: green;">'.sprintf(esc_html__('Rating Data "%s" For Post ID(s) %s Has Been Deleted.', 'wp-postratings'), "<strong><em>$meta_key</em></strong>", $post_ids).'</p>';
+						$text .= '<p style="color: green;">'.sprintf(esc_html__('Rating Data "%s" For Post ID(s) %s Has Been Deleted.', 'wp-postratings-pretty'), "<strong><em>$meta_key</em></strong>", $post_ids).'</p>';
 					}
 				}
 			}
@@ -172,44 +172,44 @@ if(!empty($postratings_log_perpage)) {
 switch($postratings_sortby) {
 	case 'id':
 		$postratings_sortby = 'rating_id';
-		$postratings_sortby_text = __('ID', 'wp-postratings');
+		$postratings_sortby_text = __('ID', 'wp-postratings-pretty');
 		break;
 	case 'username':
 		$postratings_sortby = 'rating_username';
-		$postratings_sortby_text = __('Username', 'wp-postratings');
+		$postratings_sortby_text = __('Username', 'wp-postratings-pretty');
 		break;
 	case 'rating':
 		$postratings_sortby = 'rating_rating';
-		$postratings_sortby_text = __('Rating', 'wp-postratings');
+		$postratings_sortby_text = __('Rating', 'wp-postratings-pretty');
 		break;
 	case 'postid':
 		$postratings_sortby = 'rating_postid';
-		$postratings_sortby_text = __('Post ID', 'wp-postratings');
+		$postratings_sortby_text = __('Post ID', 'wp-postratings-pretty');
 		break;
 	case 'posttitle':
 		$postratings_sortby = 'rating_posttitle';
-		$postratings_sortby_text = __('Post Title', 'wp-postratings');
+		$postratings_sortby_text = __('Post Title', 'wp-postratings-pretty');
 		break;
 	case 'ip':
 		$postratings_sortby = 'rating_ip';
-		$postratings_sortby_text = __('IP', 'wp-postratings');
+		$postratings_sortby_text = __('IP', 'wp-postratings-pretty');
 		break;
 	case 'host':
 		$postratings_sortby = 'rating_host';
-		$postratings_sortby_text = __('Host', 'wp-postratings');
+		$postratings_sortby_text = __('Host', 'wp-postratings-pretty');
 		break;
 	case 'date':
 	default:
 		$postratings_sortby = 'rating_timestamp';
-		$postratings_sortby_text = __('Date', 'wp-postratings');
+		$postratings_sortby_text = __('Date', 'wp-postratings-pretty');
 }
 
 
 ### Get Sort Order
 if ( $postratings_sortorder == 'ASC' )
-	$postratings_sortorder_text = __('Ascending', 'wp-postratings');
+	$postratings_sortorder_text = __('Ascending', 'wp-postratings-pretty');
 else
-	$postratings_sortorder_text = __('Descending', 'wp-postratings');
+	$postratings_sortorder_text = __('Descending', 'wp-postratings-pretty');
 
 // Where
 $postratings_where = '';
@@ -259,11 +259,11 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 <?php if(!empty($text)) { echo '<!-- Last Action --><div id="message" class="updated fade"><p>'.$text.'</p></div>'; } ?>
 <!-- Manage Post Ratings -->
 <div class="wrap">
-	<h1><?php esc_html_e('Manage Ratings', 'wp-postratings'); ?></h1>
-	<h2><?php esc_html_e('Rating Logs', 'wp-postratings'); ?></h2>
+	<h1><?php esc_html_e('Manage Ratings', 'wp-postratings-pretty'); ?></h1>
+	<h2><?php esc_html_e('Rating Logs', 'wp-postratings-pretty'); ?></h2>
 	<p><?php printf(
 		/* translators: 1: Number of ratings on page 2: Max on page 3: Total rating */
-		esc_html__('Displaying %1$s to %2$s of %3$s rating log entries.', 'wp-postratings'),
+		esc_html__('Displaying %1$s to %2$s of %3$s rating log entries.', 'wp-postratings-pretty'),
 		'<strong>' . number_format_i18n( $display_on_page ) . '</strong>',
 		'<strong>' . number_format_i18n( $max_on_page ) . '</strong>',
 		'<strong>' . number_format_i18n( $total_ratings ) . '</strong>'
@@ -271,7 +271,7 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 	?></p>
 	<p><?php printf(
 		/* translators: 1: Sort by text 2: Sort order text */
-		esc_html__('Sorted by %1$s in %2$s order.', 'wp-postratings'),
+		esc_html__('Sorted by %1$s in %2$s order.', 'wp-postratings-pretty'),
 		'<strong>' . $postratings_sortby_text . '</strong>',
 		'<strong>' . $postratings_sortorder_text . '</strong>'
 		);
@@ -279,13 +279,13 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 	<table class="widefat">
 		<thead>
 			<tr>
-				<th width="2%"><?php esc_html_e('ID', 'wp-postratings'); ?></th>
-				<th width="10%"><?php esc_html_e('Username', 'wp-postratings'); ?></th>
-				<th width="10%"><?php esc_html_e('Rating', 'wp-postratings'); ?></th>
-				<th width="8%"><?php esc_html_e('Post ID', 'wp-postratings'); ?></th>
-				<th width="25%"><?php esc_html_e('Post Title', 'wp-postratings'); ?></th>
-				<th width="20%"><?php esc_html_e('Date / Time', 'wp-postratings'); ?></th>
-				<th width="25%"><?php esc_html_e('IP / Host', 'wp-postratings'); ?></th>
+				<th width="2%"><?php esc_html_e('ID', 'wp-postratings-pretty'); ?></th>
+				<th width="10%"><?php esc_html_e('Username', 'wp-postratings-pretty'); ?></th>
+				<th width="10%"><?php esc_html_e('Rating', 'wp-postratings-pretty'); ?></th>
+				<th width="8%"><?php esc_html_e('Post ID', 'wp-postratings-pretty'); ?></th>
+				<th width="25%"><?php esc_html_e('Post Title', 'wp-postratings-pretty'); ?></th>
+				<th width="20%"><?php esc_html_e('Date / Time', 'wp-postratings-pretty'); ?></th>
+				<th width="25%"><?php esc_html_e('IP / Host', 'wp-postratings-pretty'); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -303,7 +303,7 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 				$postratings_rating = intval($postratings_log->rating_rating);
 				$postratings_postid = intval($postratings_log->rating_postid);
 				$postratings_posttitle = esc_html( stripslashes($postratings_log->rating_posttitle) );
-				$postratings_date = esc_html(mysql2date(sprintf(__('%s @ %s', 'wp-postratings'), get_option('date_format'), get_option('time_format')), gmdate('Y-m-d H:i:s', $postratings_log->rating_timestamp)));
+				$postratings_date = esc_html(mysql2date(sprintf(__('%s @ %s', 'wp-postratings-pretty'), get_option('date_format'), get_option('time_format')), gmdate('Y-m-d H:i:s', $postratings_log->rating_timestamp)));
 				$postratings_ip = esc_html( $postratings_log->rating_ip );
 				$postratings_host = esc_html( $postratings_log->rating_host );
 				$postratings_post_url = get_permalink( $postratings_postid ); //URL to Post
@@ -317,32 +317,32 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 					}
 					echo $postratings_rating;
 				} else {
-					if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT)) {
-						echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
-					} elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT)) {
-						echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+					if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT)) {
+						echo '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_start-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+					} elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT)) {
+						echo '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_start.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
 					}
 					if($ratings_custom) {
 						for($j=1; $j <= $ratings_max; $j++) {
 							if($j <= $postratings_rating) {
-								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_on.'.RATINGS_IMG_EXT).'" alt="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$j.'_on.'.RATINGS_IMG_EXT).'" alt="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings-pretty'), $postratings_rating).__(' Out Of ', 'wp-postratings-pretty').$ratings_max.'" title="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings-pretty'), $postratings_rating).__(' Out Of ', 'wp-postratings-pretty').$ratings_max.'" class="post-ratings-image" />';
 							} else {
-								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_'.$j.'_off.'.RATINGS_IMG_EXT).'" alt="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_'.$j.'_off.'.RATINGS_IMG_EXT).'" alt="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings-pretty'), $postratings_rating).__(' Out Of ', 'wp-postratings-pretty').$ratings_max.'" title="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings-pretty'), $postratings_rating).__(' Out Of ', 'wp-postratings-pretty').$ratings_max.'" class="post-ratings-image" />';
 							}
 						}
 					} else {
 						for($j=1; $j <= $ratings_max; $j++) {
 							if($j <= $postratings_rating) {
-								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_on.'.RATINGS_IMG_EXT).'" alt="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings-pretty'), $postratings_rating).__(' Out Of ', 'wp-postratings-pretty').$ratings_max.'" title="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings-pretty'), $postratings_rating).__(' Out Of ', 'wp-postratings-pretty').$ratings_max.'" class="post-ratings-image" />';
 							} else {
-								echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_off.'.RATINGS_IMG_EXT).'" alt="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" title="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings'), $postratings_rating).__(' Out Of ', 'wp-postratings').$ratings_max.'" class="post-ratings-image" />';
+								echo '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_off.'.RATINGS_IMG_EXT).'" alt="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings-pretty'), $postratings_rating).__(' Out Of ', 'wp-postratings-pretty').$ratings_max.'" title="'.sprintf(_n('User Rate This %s Star', 'User Rate This %s Stars', $postratings_rating, 'wp-postratings-pretty'), $postratings_rating).__(' Out Of ', 'wp-postratings-pretty').$ratings_max.'" class="post-ratings-image" />';
 							}
 						}
 					}
-					if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT)) {
-						echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
-					} elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT)) {
-						echo '<img src="'.plugins_url('wp-postratings/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+					if(is_rtl() && file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT)) {
+						echo '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_end-rtl.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
+					} elseif(file_exists(WP_PLUGIN_DIR.'/wp-postratings-pretty/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT)) {
+						echo '<img src="'.plugins_url('wp-postratings-pretty/images/'.$ratings_image.'/rating_end.'.RATINGS_IMG_EXT).'" alt="" class="post-ratings-image" />';
 					}
 				}
 				echo '</td>'."\n";
@@ -354,7 +354,7 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 				$i++;
 			}
 		} else {
-			echo '<tr><td colspan="7" align="center"><strong>'.esc_html__('No Rating Logs Found', 'wp-postratings').'</strong></td></tr>';
+			echo '<tr><td colspan="7" align="center"><strong>'.esc_html__('No Rating Logs Found', 'wp-postratings-pretty').'</strong></td></tr>';
 		}
 	?>
 		</tbody>
@@ -369,7 +369,7 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 				<td align="<?php echo is_rtl() ? 'right' : 'left'; ?>" width="50%">
 					<?php
 						if($postratings_page > 1 && ((($postratings_page*$postratings_log_perpage)-($postratings_log_perpage-1)) <= $total_ratings)) {
-							echo '<strong>&laquo;</strong> <a href="'.$base_page.'&amp;ratingpage='.($postratings_page-1).$postratings_sort_url.'" title="&laquo; '.esc_html__('Previous Page', 'wp-postratings').'">'.esc_html__('Previous Page', 'wp-postratings').'</a>';
+							echo '<strong>&laquo;</strong> <a href="'.$base_page.'&amp;ratingpage='.($postratings_page-1).$postratings_sort_url.'" title="&laquo; '.esc_html__('Previous Page', 'wp-postratings-pretty').'">'.esc_html__('Previous Page', 'wp-postratings-pretty').'</a>';
 						} else {
 							echo '&nbsp;';
 						}
@@ -378,7 +378,7 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 				<td align="<?php echo is_rtl() ? 'left' : 'right'; ?>" width="50%">
 					<?php
 						if($postratings_page >= 1 && ((($postratings_page*$postratings_log_perpage)+1) <=  $total_ratings)) {
-							echo '<a href="'.$base_page.'&amp;ratingpage='.($postratings_page+1).$postratings_sort_url.'" title="'.esc_html__('Next Page', 'wp-postratings').' &raquo;">'.esc_html__('Next Page', 'wp-postratings').'</a> <strong>&raquo;</strong>';
+							echo '<a href="'.$base_page.'&amp;ratingpage='.($postratings_page+1).$postratings_sort_url.'" title="'.esc_html__('Next Page', 'wp-postratings-pretty').' &raquo;">'.esc_html__('Next Page', 'wp-postratings-pretty').'</a> <strong>&raquo;</strong>';
 						} else {
 							echo '&nbsp;';
 						}
@@ -387,28 +387,28 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 			</tr>
 			<tr class="alternate">
 				<td colspan="2" align="center">
-					<?php printf(esc_html__('Pages (%s): ', 'wp-postratings'), number_format_i18n($total_pages)); ?>
+					<?php printf(esc_html__('Pages (%s): ', 'wp-postratings-pretty'), number_format_i18n($total_pages)); ?>
 					<?php
 						if ($postratings_page >= 4) {
-							echo '<strong><a href="'.$base_page.'&amp;ratingpage=1'.$postratings_sort_url.$postratings_sort_url.'" title="'.esc_html__('Go to First Page', 'wp-postratings').'">&laquo; '.esc_html__('First', 'wp-postratings').'</a></strong> ... ';
+							echo '<strong><a href="'.$base_page.'&amp;ratingpage=1'.$postratings_sort_url.$postratings_sort_url.'" title="'.esc_html__('Go to First Page', 'wp-postratings-pretty').'">&laquo; '.esc_html__('First', 'wp-postratings-pretty').'</a></strong> ... ';
 						}
 						if($postratings_page > 1) {
-							echo ' <strong><a href="'.$base_page.'&amp;ratingpage='.($postratings_page-1).$postratings_sort_url.'" title="&laquo; '.esc_html__('Go to Page', 'wp-postratings').' '.number_format_i18n($postratings_page-1).'">&laquo;</a></strong> ';
+							echo ' <strong><a href="'.$base_page.'&amp;ratingpage='.($postratings_page-1).$postratings_sort_url.'" title="&laquo; '.esc_html__('Go to Page', 'wp-postratings-pretty').' '.number_format_i18n($postratings_page-1).'">&laquo;</a></strong> ';
 						}
 						for($i = $postratings_page - 2 ; $i  <= $postratings_page +2; $i++) {
 							if ($i >= 1 && $i <= $total_pages) {
 								if($i == $postratings_page) {
 									echo '<strong>['.number_format_i18n($i).']</strong> ';
 								} else {
-									echo '<a href="'.$base_page.'&amp;ratingpage='.($i).$postratings_sort_url.'" title="'.esc_html__('Page', 'wp-postratings').' '.number_format_i18n($i).'">'.number_format_i18n($i).'</a> ';
+									echo '<a href="'.$base_page.'&amp;ratingpage='.($i).$postratings_sort_url.'" title="'.esc_html__('Page', 'wp-postratings-pretty').' '.number_format_i18n($i).'">'.number_format_i18n($i).'</a> ';
 								}
 							}
 						}
 						if($postratings_page < $total_pages) {
-							echo ' <strong><a href="'.$base_page.'&amp;ratingpage='.($postratings_page+1).$postratings_sort_url.'" title="'.esc_html__('Go to Page', 'wp-postratings').' '.number_format_i18n($postratings_page+1).' &raquo;">&raquo;</a></strong> ';
+							echo ' <strong><a href="'.$base_page.'&amp;ratingpage='.($postratings_page+1).$postratings_sort_url.'" title="'.esc_html__('Go to Page', 'wp-postratings-pretty').' '.number_format_i18n($postratings_page+1).' &raquo;">&raquo;</a></strong> ';
 						}
 						if (($postratings_page+2) < $total_pages) {
-							echo ' ... <strong><a href="'.$base_page.'&amp;ratingpage='.($total_pages).$postratings_sort_url.'" title="'.esc_html__('Go to Last Page', 'wp-postratings').'">'.esc_html__('Last', 'wp-postratings').' &raquo;</a></strong>';
+							echo ' ... <strong><a href="'.$base_page.'&amp;ratingpage='.($total_pages).$postratings_sort_url.'" title="'.esc_html__('Go to Last Page', 'wp-postratings-pretty').'">'.esc_html__('Last', 'wp-postratings-pretty').' &raquo;</a></strong>';
 						}
 					?>
 				</td>
@@ -423,22 +423,22 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 		<input type="hidden" name="page" value="<?php echo $base_name; ?>" />
 		<table class="widefat">
 			<tr>
-				<th><?php esc_html_e('Filter Options:', 'wp-postratings'); ?></th>
+				<th><?php esc_html_e('Filter Options:', 'wp-postratings-pretty'); ?></th>
 				<td>
-					<?php esc_html_e('Post ID:', 'wp-postratings'); ?>&nbsp;<input type="text" name="id" value="<?php echo $postratings_filterid; ?>" size="7" maxlength="10" />
+					<?php esc_html_e('Post ID:', 'wp-postratings-pretty'); ?>&nbsp;<input type="text" name="id" value="<?php echo $postratings_filterid; ?>" size="7" maxlength="10" />
 					&nbsp;&nbsp;&nbsp;
 					<select name="user" size="1">
 						<option value=""></option>
 						<?php
-							$filter_users = $wpdb->get_results( $wpdb->prepare( "SELECT DISTINCT rating_username, rating_userid FROM {$wpdb->ratings} WHERE rating_username != %s ORDER BY rating_userid ASC, rating_username ASC", __(' Guest', 'wp-postratings' ) ) );
+							$filter_users = $wpdb->get_results( $wpdb->prepare( "SELECT DISTINCT rating_username, rating_userid FROM {$wpdb->ratings} WHERE rating_username != %s ORDER BY rating_userid ASC, rating_username ASC", __(' Guest', 'wp-postratings-pretty' ) ) );
 							if($filter_users) {
 								foreach($filter_users as $filter_user) {
 									$rating_username = esc_html(stripslashes($filter_user->rating_username));
 									$rating_userid = intval($filter_user->rating_userid);
 									if($rating_userid > 0) {
-										$prefix = esc_html__('Registered User: ', 'wp-postratings');
+										$prefix = esc_html__('Registered User: ', 'wp-postratings-pretty');
 									} else {
-										$prefix = esc_html__('Comment Author: ', 'wp-postratings');
+										$prefix = esc_html__('Comment Author: ', 'wp-postratings-pretty');
 									}
 									if($rating_username == $postratings_filteruser) {
 										echo '<option value="'.esc_attr($rating_username).'" selected="selected">'.$prefix.' '.$rating_username.'</option>'."\n";
@@ -457,7 +457,7 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 							if($filter_ratings) {
 								foreach($filter_ratings as $filter_rating) {
 									$rating_rating = $filter_rating->rating_rating;
-									$prefix = esc_html__('Rating: ', 'wp-postratings');
+									$prefix = esc_html__('Rating: ', 'wp-postratings-pretty');
 									if($rating_rating == $postratings_filterrating) {
 										echo '<option value="'.$rating_rating.'" selected="selected">'.$prefix.' '.number_format_i18n($rating_rating).'</option>'."\n";
 									} else {
@@ -470,31 +470,31 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 				</td>
 			</tr>
 			<tr class="alternate">
-				<th><?php esc_html_e('Sort Options:', 'wp-postratings'); ?></th>
+				<th><?php esc_html_e('Sort Options:', 'wp-postratings-pretty'); ?></th>
 				<td>
 					<select name="by" size="1">
-						<option value="id"<?php if($postratings_sortby == 'rating_id') { echo ' selected="selected"'; }?>><?php esc_html_e('ID', 'wp-postratings'); ?></option>
-						<option value="username"<?php if($postratings_sortby == 'rating_username') { echo ' selected="selected"'; }?>><?php esc_html_e('Username', 'wp-postratings'); ?></option>
-						<option value="rating"<?php if($postratings_sortby == 'rating_rating') { echo ' selected="selected"'; }?>><?php esc_html_e('Rating', 'wp-postratings'); ?></option>
-						<option value="postid"<?php if($postratings_sortby == 'rating_postid') { echo ' selected="selected"'; }?>><?php esc_html_e('Post ID', 'wp-postratings'); ?></option>
-						<option value="posttitle"<?php if($postratings_sortby == 'rating_posttitle') { echo ' selected="selected"'; }?>><?php esc_html_e('Post Title', 'wp-postratings'); ?></option>
-						<option value="date"<?php if($postratings_sortby == 'rating_timestamp') { echo ' selected="selected"'; }?>><?php esc_html_e('Date', 'wp-postratings'); ?></option>
-						<option value="ip"<?php if($postratings_sortby == 'rating_ip') { echo ' selected="selected"'; }?>><?php esc_html_e('IP', 'wp-postratings'); ?></option>
-						<option value="host"<?php if($postratings_sortby == 'rating_host') { echo ' selected="selected"'; }?>><?php esc_html_e('Host', 'wp-postratings'); ?></option>
+						<option value="id"<?php if($postratings_sortby == 'rating_id') { echo ' selected="selected"'; }?>><?php esc_html_e('ID', 'wp-postratings-pretty'); ?></option>
+						<option value="username"<?php if($postratings_sortby == 'rating_username') { echo ' selected="selected"'; }?>><?php esc_html_e('Username', 'wp-postratings-pretty'); ?></option>
+						<option value="rating"<?php if($postratings_sortby == 'rating_rating') { echo ' selected="selected"'; }?>><?php esc_html_e('Rating', 'wp-postratings-pretty'); ?></option>
+						<option value="postid"<?php if($postratings_sortby == 'rating_postid') { echo ' selected="selected"'; }?>><?php esc_html_e('Post ID', 'wp-postratings-pretty'); ?></option>
+						<option value="posttitle"<?php if($postratings_sortby == 'rating_posttitle') { echo ' selected="selected"'; }?>><?php esc_html_e('Post Title', 'wp-postratings-pretty'); ?></option>
+						<option value="date"<?php if($postratings_sortby == 'rating_timestamp') { echo ' selected="selected"'; }?>><?php esc_html_e('Date', 'wp-postratings-pretty'); ?></option>
+						<option value="ip"<?php if($postratings_sortby == 'rating_ip') { echo ' selected="selected"'; }?>><?php esc_html_e('IP', 'wp-postratings-pretty'); ?></option>
+						<option value="host"<?php if($postratings_sortby == 'rating_host') { echo ' selected="selected"'; }?>><?php esc_html_e('Host', 'wp-postratings-pretty'); ?></option>
 					</select>
 					&nbsp;&nbsp;&nbsp;
 					<select name="order" size="1">
-						<option value="asc"<?php if($postratings_sortorder == 'asc') { echo ' selected="selected"'; }?>><?php esc_html_e('Ascending', 'wp-postratings'); ?></option>
-						<option value="desc"<?php if($postratings_sortorder == 'desc') { echo ' selected="selected"'; } ?>><?php esc_html_e('Descending', 'wp-postratings'); ?></option>
+						<option value="asc"<?php if($postratings_sortorder == 'asc') { echo ' selected="selected"'; }?>><?php esc_html_e('Ascending', 'wp-postratings-pretty'); ?></option>
+						<option value="desc"<?php if($postratings_sortorder == 'desc') { echo ' selected="selected"'; } ?>><?php esc_html_e('Descending', 'wp-postratings-pretty'); ?></option>
 					</select>
 					&nbsp;&nbsp;&nbsp;
 					<select name="perpage" size="1">
 					<?php
 						for($i=10; $i <= 100; $i+=10) {
 							if($postratings_log_perpage == $i) {
-								echo "<option value=\"$i\" selected=\"selected\">".esc_html__('Per Page', 'wp-postratings').": ".number_format_i18n($i)."</option>\n";
+								echo "<option value=\"$i\" selected=\"selected\">".esc_html__('Per Page', 'wp-postratings-pretty').": ".number_format_i18n($i)."</option>\n";
 							} else {
-								echo "<option value=\"$i\">".esc_html__('Per Page', 'wp-postratings').": ".number_format_i18n($i)."</option>\n";
+								echo "<option value=\"$i\">".esc_html__('Per Page', 'wp-postratings-pretty').": ".number_format_i18n($i)."</option>\n";
 							}
 						}
 					?>
@@ -502,7 +502,7 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="submit" value="<?php esc_html_e('Go', 'wp-postratings'); ?>" class="button" /></td>
+				<td colspan="2" align="center"><input type="submit" value="<?php esc_html_e('Go', 'wp-postratings-pretty'); ?>" class="button" /></td>
 			</tr>
 		</table>
 	</form>
@@ -511,19 +511,19 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 
 <!-- Post Ratings Stats -->
 <div class="wrap">
-	<h2><?php esc_html_e('Rating Stats', 'wp-postratings'); ?></h2>
+	<h2><?php esc_html_e('Rating Stats', 'wp-postratings-pretty'); ?></h2>
 	<br style="clear" />
 	<table class="widefat">
 		<tr>
-			<th><?php esc_html_e('Total Users Voted:', 'wp-postratings'); ?></th>
+			<th><?php esc_html_e('Total Users Voted:', 'wp-postratings-pretty'); ?></th>
 			<td><?php echo number_format_i18n($total_users); ?></td>
 		</tr>
 		<tr class="alternate">
-			<th><?php esc_html_e('Total Score:', 'wp-postratings'); ?></th>
+			<th><?php esc_html_e('Total Score:', 'wp-postratings-pretty'); ?></th>
 			<td><?php echo number_format_i18n($total_score); ?></td>
 		</tr>
 		<tr>
-			<th><?php esc_html_e('Total Average:', 'wp-postratings'); ?></th>
+			<th><?php esc_html_e('Total Average:', 'wp-postratings-pretty'); ?></th>
 			<td><?php echo number_format_i18n($total_average, 2); ?></td>
 		</tr>
 	</table>
@@ -532,44 +532,44 @@ $postratings_logs = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM {$wpdb->r
 
 <!-- Delete Post Ratings Logs -->
 <div class="wrap">
-	<h2><?php esc_html_e('Delete Ratings Data/Logs', 'wp-postratings'); ?></h2>
+	<h2><?php esc_html_e('Delete Ratings Data/Logs', 'wp-postratings-pretty'); ?></h2>
 	<br style="clear" />
 	<div align="center">
 		<form method="post" action="<?php echo esc_url( $base_page ); ?>">
-		<?php wp_nonce_field('wp-postratings_logs'); ?>
+		<?php wp_nonce_field('wp-postratings-pretty_logs'); ?>
 		<table class="widefat">
 			<tr>
-				<td valign="top"><strong><?php esc_html_e('Delete Type: ', 'wp-postratings'); ?></strong></td>
+				<td valign="top"><strong><?php esc_html_e('Delete Type: ', 'wp-postratings-pretty'); ?></strong></td>
 				<td valign="top">
 					<select size="1" name="delete_datalog">
-						<option value="1"><?php esc_html_e('Logs Only', 'wp-postratings'); ?></option>
-						<option value="2"><?php esc_html_e('Data Only', 'wp-postratings'); ?></option>
-						<option value="3"><?php esc_html_e('Logs And Data', 'wp-postratings'); ?></option>
+						<option value="1"><?php esc_html_e('Logs Only', 'wp-postratings-pretty'); ?></option>
+						<option value="2"><?php esc_html_e('Data Only', 'wp-postratings-pretty'); ?></option>
+						<option value="3"><?php esc_html_e('Logs And Data', 'wp-postratings-pretty'); ?></option>
 					</select>
 				</td>
 			</tr>
 			<tr>
-				<td valign="top"><strong><?php esc_html_e('Post ID(s):', 'wp-postratings'); ?></strong></td>
+				<td valign="top"><strong><?php esc_html_e('Post ID(s):', 'wp-postratings-pretty'); ?></strong></td>
 				<td valign="top">
 					<input type="text" name="delete_postid" size="20" dir="ltr" />
-					<p><?php esc_html_e('Seperate each Post ID with a comma.', 'wp-postratings'); ?></p>
-					<p><?php esc_html_e('To delete ratings data/logs from Post ID 2, 3 and 4. Just type in: 2,3,4', 'wp-postratings'); ?></p>
-					<p><?php esc_html_e('To delete ratings data/logs for all posts. Just type in: all', 'wp-postratings'); ?></p>
+					<p><?php esc_html_e('Seperate each Post ID with a comma.', 'wp-postratings-pretty'); ?></p>
+					<p><?php esc_html_e('To delete ratings data/logs from Post ID 2, 3 and 4. Just type in: 2,3,4', 'wp-postratings-pretty'); ?></p>
+					<p><?php esc_html_e('To delete ratings data/logs for all posts. Just type in: all', 'wp-postratings-pretty'); ?></p>
 				</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
-					<input type="submit" name="do" value="<?php esc_html_e('Delete Data/Logs', 'wp-postratings'); ?>" class="button" onclick="return confirm('<?php esc_html_e('You Are About To Delete Post Ratings Data/Logs.\nThis Action Is Not Reversible.\n\n Choose \\\'Cancel\\\' to stop, \\\'OK\\\' to delete.', 'wp-postratings'); ?>')" />
+					<input type="submit" name="do" value="<?php esc_html_e('Delete Data/Logs', 'wp-postratings-pretty'); ?>" class="button" onclick="return confirm('<?php esc_html_e('You Are About To Delete Post Ratings Data/Logs.\nThis Action Is Not Reversible.\n\n Choose \\\'Cancel\\\' to stop, \\\'OK\\\' to delete.', 'wp-postratings-pretty'); ?>')" />
 				</td>
 			</tr>
 		</table>
 		</form>
 	</div>
-	<h2><?php esc_html_e('Note:', 'wp-postratings'); ?></h2>
+	<h2><?php esc_html_e('Note:', 'wp-postratings-pretty'); ?></h2>
 	<ul>
-		<li><?php esc_html_e('\'Logs Only\' means the logs generated when a user rates a post.', 'wp-postratings'); ?></li>
-		<li><?php esc_html_e('\'Data Only\' means the rating data for the post.', 'wp-postratings'); ?></li>
-		<li><?php esc_html_e('\'Logs And Data\' means both the logs generated and the rating data for the post.', 'wp-postratings'); ?></li>
-		<li><?php esc_html_e('If your logging method is by IP and Cookie or by Cookie, users may still be unable to rate if they have voted before as the cookie is still stored in their computer.', 'wp-postratings'); ?></li>
+		<li><?php esc_html_e('\'Logs Only\' means the logs generated when a user rates a post.', 'wp-postratings-pretty'); ?></li>
+		<li><?php esc_html_e('\'Data Only\' means the rating data for the post.', 'wp-postratings-pretty'); ?></li>
+		<li><?php esc_html_e('\'Logs And Data\' means both the logs generated and the rating data for the post.', 'wp-postratings-pretty'); ?></li>
+		<li><?php esc_html_e('If your logging method is by IP and Cookie or by Cookie, users may still be unable to rate if they have voted before as the cookie is still stored in their computer.', 'wp-postratings-pretty'); ?></li>
 	</ul>
 </div>

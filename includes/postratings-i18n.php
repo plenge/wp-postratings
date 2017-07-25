@@ -1,9 +1,9 @@
 <?php
 /**
- * WP-PostRatings i18n.
+ * wp-postratings-pretty i18n.
  *
  * @package WordPress
- * @subpackage WP-PostRatings Plugin
+ * @subpackage wp-postratings-pretty Plugin
  */
 
 
@@ -39,7 +39,7 @@ class WPPostRatingsI18N {
 	 */
 	public function load_textdomain() {
 
-		load_plugin_textdomain( 'wp-postratings' );
+		load_plugin_textdomain( 'wp-postratings-pretty' );
 
 	}
 

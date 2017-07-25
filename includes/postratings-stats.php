@@ -1,9 +1,9 @@
 <?php
 /**
- * WP-PostRatings Stats.
+ * wp-postratings-pretty Stats.
  *
  * @package WordPress
- * @subpackage WP-PostRatings Plugin
+ * @subpackage wp-postratings-pretty Plugin
  */
 
 
@@ -40,7 +40,7 @@ if(!function_exists('get_most_rated')) {
 			$limit
 		);
 
-		if ( false === ( $most_rated = wp_cache_get( $cache_key = 'get_most_rated_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $most_rated = wp_cache_get( $cache_key = 'get_most_rated_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$most_rated = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $most_rated, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -58,7 +58,7 @@ if(!function_exists('get_most_rated')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -99,7 +99,7 @@ if(!function_exists('get_most_rated_category')) {
 			$limit
 		);
 
-		if ( false === ( $most_rated = wp_cache_get( $cache_key = 'get_most_rated_category_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $most_rated = wp_cache_get( $cache_key = 'get_most_rated_category_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$most_rated = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $most_rated, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -117,7 +117,7 @@ if(!function_exists('get_most_rated_category')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -152,7 +152,7 @@ if(!function_exists('get_most_rated_range')) {
 			$limit
 		);
 
-		if ( false === ( $most_rated = wp_cache_get( $cache_key = 'get_most_rated_range_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $most_rated = wp_cache_get( $cache_key = 'get_most_rated_range_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$most_rated = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $most_rated, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -170,7 +170,7 @@ if(!function_exists('get_most_rated_range')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -212,7 +212,7 @@ if(!function_exists('get_most_rated_range_category')) {
 			$limit
 		);
 
-		if ( false === ( $most_rated = wp_cache_get( $cache_key = 'get_most_rated_range_category_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $most_rated = wp_cache_get( $cache_key = 'get_most_rated_range_category_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$most_rated = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $most_rated, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -230,7 +230,7 @@ if(!function_exists('get_most_rated_range_category')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -265,7 +265,7 @@ if(!function_exists('get_highest_rated')) {
 			$limit
 		);
 
-		if ( false === ( $highest_rated = wp_cache_get( $cache_key = 'get_highest_rated_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $highest_rated = wp_cache_get( $cache_key = 'get_highest_rated_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$highest_rated = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $highest_rated, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -283,7 +283,7 @@ if(!function_exists('get_highest_rated')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -325,7 +325,7 @@ if(!function_exists('get_highest_rated_category')) {
 			$limit
 		);
 
-		if ( false === ( $highest_rated = wp_cache_get( $cache_key = 'get_highest_rated_category_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $highest_rated = wp_cache_get( $cache_key = 'get_highest_rated_category_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$highest_rated = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $highest_rated, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -343,7 +343,7 @@ if(!function_exists('get_highest_rated_category')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -378,7 +378,7 @@ if(!function_exists('get_highest_rated_range')) {
 			$limit
 		);
 
-		if ( false === ( $highest_rated = wp_cache_get( $cache_key = 'get_highest_rated_range_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $highest_rated = wp_cache_get( $cache_key = 'get_highest_rated_range_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$highest_rated = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $highest_rated, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -396,7 +396,7 @@ if(!function_exists('get_highest_rated_range')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -438,7 +438,7 @@ if(!function_exists('get_highest_rated_range_category')) {
 			$limit
 		);
 
-		if ( false === ( $highest_rated = wp_cache_get( $cache_key = 'get_highest_rated_range_category_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $highest_rated = wp_cache_get( $cache_key = 'get_highest_rated_range_category_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$highest_rated = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $highest_rated, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -456,7 +456,7 @@ if(!function_exists('get_highest_rated_range_category')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -491,7 +491,7 @@ if(!function_exists('get_lowest_rated')) {
 			$limit
 		);
 
-		if ( false === ( $lowest_rated = wp_cache_get( $cache_key = 'get_lowest_rated_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $lowest_rated = wp_cache_get( $cache_key = 'get_lowest_rated_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$lowest_rated = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $lowest_rated, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -509,7 +509,7 @@ if(!function_exists('get_lowest_rated')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -551,7 +551,7 @@ if(!function_exists('get_lowest_rated_category')) {
 			$limit
 		);
 
-		if ( false === ( $lowest_rated = wp_cache_get( $cache_key = 'get_lowest_rated_category_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $lowest_rated = wp_cache_get( $cache_key = 'get_lowest_rated_category_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$lowest_rated = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $lowest_rated, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -569,7 +569,7 @@ if(!function_exists('get_lowest_rated_category')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -604,7 +604,7 @@ if(!function_exists('get_lowest_rated_range')) {
 			$limit
 		);
 
-		if ( false === ( $highest_rated = wp_cache_get( $cache_key = 'get_lowest_rated_range_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $highest_rated = wp_cache_get( $cache_key = 'get_lowest_rated_range_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$highest_rated = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $highest_rated, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -622,7 +622,7 @@ if(!function_exists('get_lowest_rated_range')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -649,7 +649,7 @@ if(!function_exists('get_highest_score')) {
 			$limit
 		);
 
-		if ( false === ( $highest_score = wp_cache_get( $cache_key = 'get_highest_score_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $highest_score = wp_cache_get( $cache_key = 'get_highest_score_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$highest_score = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $highest_score, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -667,7 +667,7 @@ if(!function_exists('get_highest_score')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -701,7 +701,7 @@ if(!function_exists('get_highest_score_category')) {
 			$limit
 		);
 
-		if ( false === ( $highest_score = wp_cache_get( $cache_key = 'get_highest_score_category_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $highest_score = wp_cache_get( $cache_key = 'get_highest_score_category_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$highest_score = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $highest_score, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -719,7 +719,7 @@ if(!function_exists('get_highest_score_category')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -747,7 +747,7 @@ if(!function_exists('get_highest_score_range')) {
 			$limit
 		);
 
-		if ( false === ( $highest_score = wp_cache_get( $cache_key = 'get_highest_score_range_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $highest_score = wp_cache_get( $cache_key = 'get_highest_score_range_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$highest_score = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $highest_score, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -765,7 +765,7 @@ if(!function_exists('get_highest_score_range')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -800,7 +800,7 @@ if(!function_exists('get_highest_score_range_category')) {
 			$limit
 		);
 
-		if ( false === ( $highest_score = wp_cache_get( $cache_key = 'get_highest_score_range_category_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $highest_score = wp_cache_get( $cache_key = 'get_highest_score_range_category_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$highest_score = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $highest_score, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -818,7 +818,7 @@ if(!function_exists('get_highest_score_range_category')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -859,7 +859,7 @@ if(!function_exists('get_highest_rated_tag')) {
 			$limit
 		);
 
-		if ( false === ( $highest_rated = wp_cache_get( $cache_key = 'get_highest_rated_tag_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $highest_rated = wp_cache_get( $cache_key = 'get_highest_rated_tag_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$highest_rated = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $highest_rated, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -877,7 +877,7 @@ if(!function_exists('get_highest_rated_tag')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -918,7 +918,7 @@ if(!function_exists('get_lowest_rated_tag')) {
 			$limit
 		);
 
-		if ( false === ( $lowest_rated = wp_cache_get( $cache_key = 'get_lowest_rated_tag_' . md5($sql), $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $lowest_rated = wp_cache_get( $cache_key = 'get_lowest_rated_tag_' . md5($sql), $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$lowest_rated = $wpdb->get_results( $sql, ARRAY_A );
 			wp_cache_add( $cache_key, $lowest_rated, $cache_group, HOUR_IN_SECONDS );
 		}
@@ -936,7 +936,7 @@ if(!function_exists('get_lowest_rated_tag')) {
 				$output .= expand_ratings_template($temp, $post, null, $chars, false)."\n";
 			}
 		} else {
-			$output = '<li>'.esc_html__('N/A', 'wp-postratings').'</li>'."\n";
+			$output = '<li>'.esc_html__('N/A', 'wp-postratings-pretty').'</li>'."\n";
 		}
 		if($display) {
 			echo $output;
@@ -952,7 +952,7 @@ if(!function_exists('get_ratings_users')) {
 	function get_ratings_users($display = true) {
 		global $wpdb;
 
-		if ( false === ( $ratings_users = wp_cache_get( $cache_key = 'get_ratings_users', $cache_group = 'wp-postratings' ) ) ) {
+		if ( false === ( $ratings_users = wp_cache_get( $cache_key = 'get_ratings_users', $cache_group = 'wp-postratings-pretty' ) ) ) {
 			$ratings_users = $wpdb->get_var("SELECT SUM((meta_value+0.00)) FROM $wpdb->postmeta WHERE meta_key = 'ratings_users'");
 			wp_cache_add( $cache_key, $ratings_users, $cache_group, HOUR_IN_SECONDS );
 		}
