@@ -515,7 +515,7 @@ function process_ratings() {
         // Verify Referer
         if(!check_ajax_referer('postratings_'.$post_id.'-nonce', 'postratings_'.$post_id.'_nonce', false))
         {
-            esc_html_e('Failed To Verify Referrer', 'wp-postratings-pretty');
+            esc_html_e('You already rated.', 'postratings-strings');
             exit();
         }
 
