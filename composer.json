@@ -1,5 +1,5 @@
 {
-    "name": "plenge/wp-postratings-pretty-pretty",
+    "name": "plenge/wp-postratings-pretty",
     "description": "Adds an AJAX rating system for your WordPress site's content",
     "type": "wordpress-plugin",
     "authors": [

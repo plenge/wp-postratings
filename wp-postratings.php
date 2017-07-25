@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: wp-postratings-pretty-Pretty
+Plugin Name: wp-postratings-Pretty
 Plugin URI:  https://github.com/plenge/wp-postratings-pretty
 Description: Adds an AJAX rating system for your WordPress site's content.
 Version:     1.0
 Author:      Jakob Plenge / Lester Chan
 Author URI:  http://lesterchan.net
-Text Domain: wp-postratings-pretty-pretty
+Text Domain: wp-postratings-pretty
 */
 
 
