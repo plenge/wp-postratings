@@ -1,11 +1,11 @@
 {
-    "name": "lesterchan/wp-postratings",
+    "name": "plenge/wp-postratings-pretty",
     "description": "Adds an AJAX rating system for your WordPress site's content",
     "type": "wordpress-plugin",
     "authors": [
         {
-            "name": "Lester Chan",
-            "email": "lesterchan@gmail.com"
+            "name": "Plenge",
+            "email": "jakob.birkmose.plenge@netbooster.com"
         }
     ],
     "license": "GPL-2.0+",
