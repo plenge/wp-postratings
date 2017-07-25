@@ -72,16 +72,16 @@ if ( isset( $_POST['Submit'] ) ) {
 		var default_template;
 		switch(template) {
 			case "vote":
-				default_template = "%RATINGS_IMAGES_VOTE% (<strong>%RATINGS_SCORE%</strong> <?php esc_html_e('rating', 'wp-postratings-pretty'); ?><?php esc_html_e(',', 'wp-postratings-pretty'); ?> <strong>%RATINGS_USERS%</strong> <?php esc_html_e('votes', 'wp-postratings-pretty'); ?>)<br />%RATINGS_TEXT%";
+				default_template = "%RATINGS_IMAGES_VOTE% <span class='rating-text'>%RATINGS_USERS% <?php esc_html_e('ratings', 'postrating-strings'); ?>.</span>";
 				break;
 			case "text":
-				default_template = "%RATINGS_IMAGES% (<em><strong>%RATINGS_SCORE%</strong> <?php esc_html_e('rating', 'wp-postratings-pretty'); ?><?php esc_html_e(',', 'wp-postratings-pretty'); ?> <strong>%RATINGS_USERS%</strong> <?php esc_html_e('votes', 'wp-postratings-pretty'); ?><?php esc_html_e(',', 'wp-postratings-pretty'); ?> <strong><?php esc_html_e('rated', 'wp-postratings-pretty'); ?></strong></em>)";
+				default_template = "%RATINGS_IMAGES_VOTE% <span class='rating-text'><?php esc_html_e('Thank you for the rating.', 'postrating-strings'); ?></span>";
 				break;
 			case "permission":
 				default_template = "%RATINGS_IMAGES% (<em><strong>%RATINGS_SCORE%</strong> <?php esc_html_e('rating', 'wp-postratings-pretty'); ?><?php esc_html_e(',', 'wp-postratings-pretty'); ?> <strong>%RATINGS_USERS%</strong> <?php esc_html_e('votes', 'wp-postratings-pretty'); ?><?php esc_html_e(',', 'wp-postratings-pretty'); ?> <strong><?php esc_html_e('rated', 'wp-postratings-pretty'); ?></strong></em>)<br /><em><?php esc_html_e('You need to be a registered member to rate this.', 'wp-postratings-pretty'); ?></em>";
 				break;
 			case "none":
-				default_template = "%RATINGS_IMAGES_VOTE% (<?php esc_html_e('No Ratings Yet', 'wp-postratings-pretty'); ?>)<br />%RATINGS_TEXT%";
+				default_template = "%RATINGS_IMAGES_VOTE% (<?php esc_html_e('No Ratings Yet', 'postrating-strings'); ?>";
 				break;
 			case "highestrated":
 				default_template = "<li><a href=\"%POST_URL%\" title=\"%POST_TITLE%\">%POST_TITLE%</a> (%RATINGS_SCORE% <?php esc_html_e('rating', 'wp-postratings-pretty'); ?><?php esc_html_e(',', 'wp-postratings-pretty'); ?> %RATINGS_USERS% <?php esc_html_e('votes', 'wp-postratings-pretty'); ?>)</li>";
@@ -100,13 +100,13 @@ if ( isset( $_POST['Submit'] ) ) {
 		var default_template;
 		switch(template) {
 			case "vote":
-				default_template = "%RATINGS_IMAGES_VOTE% (<strong>%RATINGS_USERS%</strong> <?php esc_html_e('votes', 'wp-postratings-pretty'); ?><?php esc_html_e(',', 'wp-postratings-pretty'); ?> <?php esc_html_e('average', 'wp-postratings-pretty'); ?>: <strong>%RATINGS_AVERAGE%</strong> <?php esc_html_e('out of', 'wp-postratings-pretty'); ?> %RATINGS_MAX%)<br />%RATINGS_TEXT%";
+				default_template = "%RATINGS_IMAGES_VOTE% <span class='rating-text'>%RATINGS_USERS% <?php esc_html_e('ratings', 'postrating-strings'); ?>.</span>";
 				break;
 			case "text":
-				default_template = "%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> <?php esc_html_e('votes', 'wp-postratings-pretty'); ?><?php esc_html_e(',', 'wp-postratings-pretty'); ?> <?php esc_html_e('average', 'wp-postratings-pretty'); ?>: <strong>%RATINGS_AVERAGE%</strong> <?php esc_html_e('out of', 'wp-postratings-pretty'); ?> %RATINGS_MAX%<?php esc_html_e(',', 'wp-postratings-pretty'); ?> <strong><?php esc_html_e('rated', 'wp-postratings-pretty'); ?></strong></em>)";
+				default_template = "%RATINGS_IMAGES_VOTE% <span class='rating-text'><?php esc_html_e('Thank you for the rating.', 'postrating-strings'); ?></span>";
 				break;
 			case "permission":
-				default_template = "%RATINGS_IMAGES% (<em><strong>%RATINGS_USERS%</strong> <?php esc_html_e('votes', 'wp-postratings-pretty'); ?><?php esc_html_e(',', 'wp-postratings-pretty'); ?> <?php esc_html_e('average', 'wp-postratings-pretty'); ?>: <strong>%RATINGS_AVERAGE%</strong> <?php esc_html_e('out of', 'wp-postratings-pretty'); ?> %RATINGS_MAX%</em>)<br /><em><?php esc_html_e('You need to be a registered member to rate this.', 'wp-postratings-pretty'); ?></em>";
+				default_template = "%RATINGS_IMAGES% (<em><strong>%RATINGS_SCORE%</strong> <?php esc_html_e('rating', 'wp-postratings-pretty'); ?><?php esc_html_e(',', 'wp-postratings-pretty'); ?> <strong>%RATINGS_USERS%</strong> <?php esc_html_e('votes', 'wp-postratings-pretty'); ?><?php esc_html_e(',', 'wp-postratings-pretty'); ?> <strong><?php esc_html_e('rated', 'wp-postratings-pretty'); ?></strong></em>)<br /><em><?php esc_html_e('You need to be a registered member to rate this.', 'wp-postratings-pretty'); ?></em>";
 				break;
 			case "none":
 				default_template = "%RATINGS_IMAGES_VOTE% (<?php esc_html_e('No Ratings Yet', 'wp-postratings-pretty'); ?>)<br />%RATINGS_TEXT%";
