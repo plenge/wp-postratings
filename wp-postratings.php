@@ -578,11 +578,11 @@ function process_ratings() {
                     echo the_ratings_results($post_id, $post_ratings_users, $post_ratings_score, $post_ratings_average);
                     exit();
                 } else {
-                    printf(esc_html__('Invalid Post ID (#%s).', 'wp-postratings-pretty'), $post_id);
+                    printf(esc_html__('Invalid Post.', 'wp-postratings-pretty'), $post_id);
                     exit();
                 } // End if($post)
             } else {
-                printf(esc_html__('You Had Already Rated This Post. Post ID #%s.', 'wp-postratings-pretty'), $post_id);
+                printf(esc_html__('You already rated.', 'wp-postratings-pretty'), $post_id);
                 exit();
             }// End if(!$rated)
         } // End if($rate && $post_id && check_allowtorate())
