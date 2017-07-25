@@ -122,6 +122,6 @@ function rate_post() {
 			jQuery.ajax({type: 'POST', xhrFields: {withCredentials: true}, dataType: 'html', url: ratingsL10n.ajax_url, data: 'action=postratings&pid=' + post_id + '&rate=' + post_rating + '&postratings_' + post_id + '_nonce=' + post_ratings_nonce, cache: false, success: rate_post_success});
 		}
 	} else {
-		alert(ratingsL10n.text_wait);
+		
 	}
 }
