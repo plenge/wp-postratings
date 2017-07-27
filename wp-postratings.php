@@ -171,7 +171,7 @@ function the_ratings_vote($post_id, $new_user = 0, $new_score = 0, $new_average 
   }
     // If No Ratings, Return No Ratings templae
     if( intval( get_post_meta($post_id, 'ratings_users', true ) ) === 0 ) {
-        $template_postratings_none = "%RATINGS_IMAGES_VOTE% <span class='rating-text'>%RATINGS_USERS% " . __('No ratings yet', 'postrating-strings') . ".</span>";
+        $template_postratings_none = "%RATINGS_IMAGES_VOTE% <span class='rating-text'>" . __('No ratings yet', 'postrating-strings') . ".</span>";
         // Return Post Ratings Template
         return expand_ratings_template($template_postratings_none, $post_id, $post_ratings_data);
     } else {
