@@ -34,7 +34,7 @@ Text Domain: wp-postratings-pretty
  * Prevent direct access to the file.
  */
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+    exit;
 }
 
 /**
@@ -107,12 +107,12 @@ function the_ratings($start_tag = 'div', $custom_id = 0, $display = true) {
     // HTML Attributes
     $ratings_options = get_option('postratings_options');
     $ratings_options['richsnippet'] = isset( $ratings_options['richsnippet'] ) ? $ratings_options['richsnippet'] : 1;
-    if( is_singular() && $ratings_options['richsnippet'] ) {
-        $itemtype = apply_filters('wp_postratings_schema_itemtype', 'itemscope itemtype="http://schema.org/Article"');
-        $attributes = 'id="post-ratings-'.$ratings_id.'" class="post-ratings" '.$itemtype;
-    } else {
+    // if( is_singular() && $ratings_options['richsnippet'] ) {
+    //     $itemtype = apply_filters('wp_postratings_schema_itemtype', 'itemscope itemtype="http://schema.org/Article"');
+    //     $attributes = 'id="post-ratings-'.$ratings_id.'" class="post-ratings" '.$itemtype;
+    // } else {
         $attributes = 'id="post-ratings-'.$ratings_id.'" class="post-ratings"';
-    }
+    // }
     // If User Voted Or Is Not Allowed To Rate
     if($user_voted) {
         if(!$display) {
@@ -1150,7 +1150,7 @@ function expand_ratings_template($template, $post_data, $post_ratings_data = nul
     }
 
     // Google Rich Snippet
-	$google_structured_data = '';
+    $google_structured_data = '';
     $ratings_options['richsnippet'] = isset( $ratings_options['richsnippet'] ) ? $ratings_options['richsnippet'] : 1;
     if( $ratings_options['richsnippet'] && is_singular() && $is_main_loop ) {
         $itemtype = apply_filters( 'wp_postratings_schema_itemtype', 'itemscope itemtype="http://schema.org/Article"' );
@@ -1211,7 +1211,25 @@ function expand_ratings_template($template, $post_data, $post_ratings_data = nul
             $ratings_meta .= '</div>';
         }
 
-        $google_structured_data =  apply_filters( 'wp_postratings_google_structured_data', ( empty( $itemtype ) ? $ratings_meta : ( $post_meta . $ratings_meta ) ) );
+        global $post;
+
+        // $google_structured_data =  apply_filters( 'wp_postratings_google_structured_data', ( empty( $itemtype ) ? $ratings_meta : ( $post_meta . $ratings_meta ) ) );
+        $schema_data = '';
+        $schema_data .= '<script type="application/ld+json"> {';
+        $schema_data .= '"@context": "http://schema.org",';
+        $schema_data .= '"@type": "' . get_field('schema_type') . '",';
+        $schema_data .= '"@id": "' . $post->ID . '",';
+        $schema_data .= '"aggregateRating": {';
+        $schema_data .= '"@type": "AggregateRating",';
+        $schema_data .= '"bestRating": "5",';
+        $schema_data .= '"worstRating": "1",';
+        $schema_data .= '"ratingValue": "' . $post_ratings_average . '",';
+        $schema_data .= '"ratingCount": "' . $post_ratings_users . '"';
+        $schema_data .= '}';
+        $schema_data .= '} </script>';
+
+
+        $google_structured_data =  apply_filters( 'wp_postratings_google_structured_data', ( $schema_data ));
     }
 
     return apply_filters( 'expand_ratings_template', ( $value . $google_structured_data ) );
