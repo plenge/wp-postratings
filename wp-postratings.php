@@ -80,15 +80,19 @@ function the_ratings($start_tag = 'div', $custom_id = 0, $display = true) {
     // Allow Custom ID
     if(intval($custom_id) > 0) {
         $ratings_id = $custom_id;
+        $ratings_id = icl_object_id($ratings_id, 'post', false, 'da');        
     } else {
         // If Global $id is 0, Get The Loop Post ID
         if($id === 0) {
             $ratings_id = get_the_ID();
+            $ratings_id = icl_object_id($ratings_id, 'post', false, 'da');
         } elseif (is_null($id)) {
             global $post;
             $ratings_id = $post->ID;
+            $ratings_id = icl_object_id($ratings_id, 'post', false, 'da');            
         } else {
             $ratings_id = $id;
+            $ratings_id = icl_object_id($ratings_id, 'post', false, 'da');            
         }
     }
 
