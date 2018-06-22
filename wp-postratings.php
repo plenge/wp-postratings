@@ -156,7 +156,7 @@ function the_ratings_results( $post_id, $new_user = 0, $new_score = 0, $new_aver
     if( $type === 1 ) {
         $template_postratings_text = stripslashes( get_option( 'postratings_template_permission' ) );
     } else {
-        $template_postratings_text = "%RATINGS_IMAGES_VOTE% <span class='rating-text'>" . __('Thank you for the rating', 'postrating-strings') . ".</span>";
+        $template_postratings_text = "%RATINGS_IMAGES_VOTE% <span class='rating-text'>" . __('Thank you for the rating of our hotel', 'postrating-strings') . ".</span>";
     }
     // Return Post Ratings Template
     return expand_ratings_template( $template_postratings_text, $post_id, $post_ratings_data );
@@ -180,7 +180,7 @@ function the_ratings_vote($post_id, $new_user = 0, $new_score = 0, $new_average 
         return expand_ratings_template($template_postratings_none, $post_id, $post_ratings_data);
     } else {
         // Display The Contents
-        $template_postratings_vote = "%RATINGS_IMAGES_VOTE% <span class='rating-text'>%RATINGS_USERS% " . __('ratings', 'postrating-strings') . ".</span>";
+        $template_postratings_vote = "%RATINGS_IMAGES_VOTE% <span class='rating-text'>%RATINGS_USERS% " . __('have rated the hotel', 'postrating-strings') . ".</span>";
         // Return Post Ratings Voting Template
         return expand_ratings_template($template_postratings_vote, $post_id, $post_ratings_data);
     }
